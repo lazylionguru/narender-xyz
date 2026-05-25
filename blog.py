@@ -49,7 +49,7 @@ def fetch_unsplash_image(query, out_dir):
     try:
         resp = requests.get(
             "https://api.unsplash.com/search/photos",
-            params={"query": query, "per_page": 1, "orientation": "landscape"},
+            params={"query": query, "per_page": 3, "orientation": "landscape", "content_filter": "high", "order_by": "relevant"},
             headers={"Authorization": f"Client-ID {UNSPLASH_ACCESS_KEY}"},
             timeout=10,
         )
@@ -59,8 +59,9 @@ def fetch_unsplash_image(query, out_dir):
             print(f"  Unsplash: no results for '{query}'")
             return None
 
-        photo       = results[0]
-        img_url     = photo["urls"]["regular"]
+        # Pick the result with the most likes — proxy for quality
+        photo       = max(results, key=lambda p: p.get("likes", 0))
+        img_url     = photo["urls"]["full"]
         alt_text    = photo.get("alt_description") or photo.get("description") or query
         photographer = photo["user"]["name"]
         photo_link  = photo["links"]["html"]
@@ -523,7 +524,7 @@ OUTPUT FORMAT — return a JSON object with exactly these keys:
 
 {{
   "body": "the full HTML body content as a string",
-  "unsplash_query": "3-5 word Unsplash search query for a relevant cover image (no brand names, no people)",
+  "unsplash_query": "literal 2-3 word Unsplash search query, like a photo editor would search — the actual subject of the image",
   "cover_alt": "descriptive alt text for the cover image, 10-15 words, includes the topic naturally",
   "screenshot_hints": ["short description of screenshot 1 that would add value", "short description of screenshot 2"]
 }}
@@ -543,8 +544,13 @@ BODY content rules:
 - Write between 800 and 1200 words of body content.
 
 UNSPLASH QUERY rules:
-- 3 to 5 words, descriptive, no brand names, no people
-- Think abstract but relevant: "content strategy laptop screen", "seo analytics dashboard", "web search interface"
+- 2 to 3 words maximum. Literal and visual. Think like a photo editor, not a content strategist.
+- Search for the actual physical subject that best represents the post topic.
+- Good examples: "reddit app", "google search", "bitcoin coin", "laptop coding", "data analytics", "content writing"
+- Bad examples: "content strategy laptop screen", "seo analytics dashboard", "web search interface" — too abstract, returns wrong images
+- For social media topics: use the platform name directly e.g. "reddit logo", "twitter feed"
+- For crypto topics: "bitcoin", "ethereum", "blockchain network"
+- For writing/SEO topics: "writing laptop", "search results", "analytics screen"
 
 Return ONLY the raw JSON. No markdown fences, no explanation.
 """
