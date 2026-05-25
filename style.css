@@ -204,6 +204,8 @@ footer { border-top: 1px solid var(--border); padding: 2rem 0; }
 /* INLINE FIGURES (screenshots) */
 .post-figure { margin: 2rem 0; }
 .post-figure img { width: 100%; border-radius: 8px; border: 1px solid var(--border); display: block; }
+.post-figure img.hidden { display: none; }
+.post-figure:has(img.hidden) { display: none; }
 .post-figure figcaption { font-size: 12px; color: var(--muted2); margin-top: 8px; text-align: center; }
 
 /* BLOG POST */

@@ -477,7 +477,19 @@ WRITING PRINCIPLES:
 10. Write for the AI summary. Structure content so the three-sentence AI summary of your post
     still contains your core argument and your name.
 
-GEO CONTENT PRINCIPLES to weave in naturally:
+OUTBOUND LINKS — include 2 to 4 naturally within the body:
+Link to authoritative external sources where relevant. Use proper <a href="..." target="_blank" rel="noopener">anchor text</a> inline.
+Good sources to link to depending on topic:
+- SEO/GEO: Google Search Central (developers.google.com/search), Moz Blog (moz.com/blog),
+  Ahrefs Blog (ahrefs.com/blog), Search Engine Journal (searchenginejournal.com),
+  Perplexity (perplexity.ai), Google Search Console (search.google.com/search-console)
+- Web3: Ethereum Foundation (ethereum.org), Messari (messari.io), DeFi Llama (defillama.com),
+  CoinDesk (coindesk.com), The Block (theblock.co)
+- General: Wikipedia for definitions, Reddit threads where genuinely relevant
+Anchor text should be descriptive and natural, never "click here" or "read more".
+Example: according to <a href="https://developers.google.com/search/docs/fundamentals/how-search-works" target="_blank" rel="noopener">Google's documentation on how search works</a>
+
+
 - Stop thinking in keywords, start thinking in prompts
 - SEO is the foundation, GEO is the building on top
 - Reverse-engineer the AI answer — imagine what a buyer asks ChatGPT, then be that answer
@@ -576,7 +588,7 @@ def build_html(topic, body, dt, cover=None):
         alt_txt  = alt.group(1).strip() if alt else desc_txt
         img_name = re.sub(r'[^a-z0-9]+', '-', desc_txt.lower())[:40].strip('-')
         return f"""<figure class="post-figure">
-  <img src="/blog/{slug}/{img_name}.jpg" alt="{alt_txt}" loading="lazy" width="800" height="450">
+  <img src="/blog/{slug}/{img_name}.jpg" alt="{alt_txt}" loading="lazy" width="800" height="450" onerror="this.classList.add('hidden')">
   <figcaption>{alt_txt}</figcaption>
 </figure>"""
 
