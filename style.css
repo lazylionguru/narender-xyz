@@ -4,7 +4,7 @@
   --bg: #0a0a0a; --bg2: #111; --bg3: #181818;
   --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.12);
   --gold: #d4a843; --gold2: #f0c86a; --gold-dim: rgba(212,168,67,0.1);
-  --text: #ede9e0; --muted: #7a7670; --muted2: #444240;
+  --text: #ede9e0; --muted: #9a9590; --muted2: #6e6b67;
   --green: #52b788; --red: #e05252;
   --r: 10px; --font: 'Inter', -apple-system, sans-serif;
 }
@@ -27,7 +27,7 @@ nav {
 .nav-logo { font-size: 14px; font-weight: 700; letter-spacing: 0.04em; }
 .nav-logo em { color: var(--gold); font-style: normal; }
 .nav-right { display: flex; align-items: center; gap: 1.75rem; }
-.nav-link { font-size: 13px; color: var(--muted); }
+.nav-link { font-size: 13px; color: #a8a39a; }
 .nav-link:hover { color: var(--text); }
 .nav-cta {
   font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
