@@ -44,24 +44,23 @@ COVER_SCRIPT = SITE_ROOT / "generate-cover.js"
 
 def generate_cover(title, category, out_dir):
     """
-    Calls generate-cover.js via Node to render a branded cover.jpg.
-    Returns cover_path or None on failure.
+    Calls generate-cover.js via Node to render cover.jpg and thumb.jpg.
+    Returns True on success, False on failure.
     """
     import subprocess
-    cover_path = out_dir / "cover.jpg"
     try:
         result = subprocess.run(
-            ["node", str(COVER_SCRIPT), title, category, str(cover_path)],
+            ["node", str(COVER_SCRIPT), title, category, str(out_dir)],
             capture_output=True, text=True, timeout=30,
         )
         if result.returncode != 0:
             print(f"  Cover error: {result.stderr.strip()}")
-            return None
-        print(f"  Cover generated: {cover_path.name}")
-        return cover_path
+            return False
+        print(f"  Cover + thumb generated")
+        return True
     except Exception as e:
         print(f"  Cover error: {e}")
-        return None
+        return False
 
 
 # ── Topic bank ─────────────────────────────────────────────────────────────────
@@ -551,7 +550,7 @@ def build_html(topic, body, dt, cover=None, cover_alt=""):
 
     # Cover image block
     if cover:
-        img_alt = cover_alt if cover_alt else f"Branded cover image for the post: {title}"
+        img_alt = cover_alt if cover_alt else f"Branded cover image for: {title}"
         cover_html = f"""
 <div class="post-cover">
   <img src="/blog/{slug}/cover.jpg" alt="{img_alt}" width="1200" height="630" loading="eager">
@@ -587,6 +586,13 @@ def build_html(topic, body, dt, cover=None, cover_alt=""):
   <meta property="og:type" content="article">
   <meta property="og:url" content="{url}">
   <meta property="og:image" content="{SITE_URL}/blog/{slug}/cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@0xnarender">
+  <meta name="twitter:title" content="{title}">
+  <meta name="twitter:description" content="{first_sentence}.">
+  <meta name="twitter:image" content="{SITE_URL}/blog/{slug}/cover.jpg">
   <meta property="article:author" content="Narender Charan">
   <meta property="article:published_time" content="{date_iso}">
   <link rel="canonical" href="{url}">
@@ -722,7 +728,7 @@ def update_blog_index(new_topics, dt):
         cards += f"""
     <article class="bi-card" data-cat="{category}">
       <a class="bi-card-img" href="/blog/{slug}/">
-        <img src="/blog/{slug}/cover.jpg" alt="Cover for {title}" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
+        <img src="/blog/{slug}/thumb.jpg" alt="Thumbnail for {title}" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
       </a>
       <div class="bi-card-body">
         <span class="blog-cat {cat_class}">{cat_label}</span>
@@ -862,7 +868,7 @@ def main():
             body, cover_alt, screenshot_hints = generate_post(topic)
             print(f"  Generated {len(body)} chars, ~{estimate_read_time(body)} min read")
 
-            # Generate branded cover image
+            # Generate branded cover + thumb
             out_dir = BLOG_DIR / topic["slug"]
             out_dir.mkdir(parents=True, exist_ok=True)
             cover = generate_cover(topic["title"], topic["category"], out_dir)
