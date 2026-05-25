@@ -596,6 +596,7 @@ def build_html(topic, body, dt, cover=None, cover_alt=""):
   <meta property="article:author" content="Narender Charan">
   <meta property="article:published_time" content="{date_iso}">
   <link rel="canonical" href="{url}">
+  <link rel="preload" href="/style.css" as="style">
   <link rel="stylesheet" href="/style.css">
   <script type="application/ld+json">
   {{
