@@ -22,37 +22,15 @@
     <priority>0.8</priority>
   </url>
 
-
   <url>
-    <loc>https://narender.xyz/blog/what-content-types-do-llms-actually-cite/</loc>
+    <loc>https://narender.xyz/blog/first-paragraph-is-your-geo-bet/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://narender.xyz/blog/questions-to-ask-before-hiring-geo-specialist/</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://narender.xyz/blog/why-web3-content-never-gets-cited-by-ai/</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://narender.xyz/blog/stop-thinking-keywords-start-thinking-prompts/</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://narender.xyz/blog/reverse-engineer-the-ai-answer/</loc>
+    <loc>https://narender.xyz/blog/geo-for-defi-protocols/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -66,42 +44,7 @@
   </url>
 
   <url>
-    <loc>https://narender.xyz/blog/how-to-improve-ai-search-visibility-without-backlink-budget/</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://narender.xyz/blog/entity-before-content/</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://narender.xyz/blog/first-paragraph-is-your-geo-bet/</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://narender.xyz/blog/reddit-is-credibility-not-a-backlink/</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://narender.xyz/blog/how-to-make-your-brand-the-source-ai-quotes/</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://narender.xyz/blog/specificity-is-the-signal/</loc>
+    <loc>https://narender.xyz/blog/questions-to-ask-before-hiring-geo-specialist/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -122,14 +65,7 @@
   </url>
 
   <url>
-    <loc>https://narender.xyz/blog/geo-for-defi-protocols/</loc>
-    <lastmod>2026-05-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://narender.xyz/blog/the-10000-dollar-geo-bet/</loc>
+    <loc>https://narender.xyz/blog/stop-thinking-keywords-start-thinking-prompts/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -137,6 +73,13 @@
 
   <url>
     <loc>https://narender.xyz/blog/comparison-content-is-ai-catnip/</loc>
+    <lastmod>2026-05-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://narender.xyz/blog/specificity-is-the-signal/</loc>
     <lastmod>2026-05-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -162,4 +105,5 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+
 </urlset>
