@@ -720,13 +720,14 @@ def update_blog_index(new_topics, dt):
         read_time = 7
 
         cards += f"""
-    <article class="bpost" data-cat="{category}">
-      <div class="bpost-inner">
-        <div class="bpost-left">
-          <div class="bpost-top"><span class="blog-cat {cat_class}">{cat_label}</span></div>
-          <a class="bpost-title" href="/blog/{slug}/">{title}</a>
-        </div>
-        <div class="bpost-meta">
+    <article class="bi-card" data-cat="{category}">
+      <a class="bi-card-img" href="/blog/{slug}/">
+        <img src="/blog/{slug}/cover.jpg" alt="Cover for {title}" loading="lazy" onerror="this.parentElement.classList.add('no-img')">
+      </a>
+      <div class="bi-card-body">
+        <span class="blog-cat {cat_class}">{cat_label}</span>
+        <a class="bi-card-title" href="/blog/{slug}/">{title}</a>
+        <div class="bi-meta">
           <span>{date_disp}</span>
           <span class="blog-dot"></span>
           <span>{read_time} min</span>
@@ -735,7 +736,7 @@ def update_blog_index(new_topics, dt):
     </article>
 """
 
-    insert_marker = '<div class="blog-list" id="blog-grid">'
+    insert_marker = '<div class="bi-grid" id="bi-grid">'
     featured_end  = '</article>'
 
     idx_grid  = content.find(insert_marker)
