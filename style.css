@@ -200,10 +200,8 @@ footer { border-top: 1px solid var(--border); padding: 2rem 0; }
 .blog-cta p { font-size: 13px; color: var(--muted); margin-bottom: 1.5rem; max-width: 420px; margin-left: auto; margin-right: auto; }
 
 /* COVER IMAGE */
-.post-cover { max-width: 900px; margin: 0 auto 0; padding: 0 2rem; }
-.post-cover img { width: 100%; height: 420px; object-fit: cover; border-radius: 12px; display: block; }
-.cover-credit { font-size: 11px; color: var(--muted2); text-align: right; margin-top: 6px; }
-.cover-credit a { color: var(--muted2); text-decoration: underline; }
+.post-cover { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+.post-cover img { width: 100%; height: auto; border-radius: 12px; display: block; }
 
 /* INLINE FIGURES (screenshots) */
 .post-figure { margin: 2rem 0; }

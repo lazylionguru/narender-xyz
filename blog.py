@@ -13,7 +13,7 @@ import time
 import random
 import math
 import json
-import requests
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 from openai import OpenAI
@@ -22,11 +22,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # ── Config ─────────────────────────────────────────────────────────────────────
-DEEPSEEK_API_KEY    = os.environ["DEEPSEEK_KEY"]
-UNSPLASH_ACCESS_KEY = os.environ["UNSPLASH_ACCESS_KEY"]
-CANDIDATE_COUNT     = int(os.environ.get("CANDIDATE_COUNT", "12"))
-AUTO_MODE           = os.environ.get("AUTO_MODE", "false").lower() == "true"
-POSTS_PER_RUN       = int(os.environ.get("POSTS_PER_RUN", "3"))
+DEEPSEEK_API_KEY = os.environ["DEEPSEEK_KEY"]
+CANDIDATE_COUNT  = int(os.environ.get("CANDIDATE_COUNT", "12"))
+AUTO_MODE        = os.environ.get("AUTO_MODE", "false").lower() == "true"
+POSTS_PER_RUN    = int(os.environ.get("POSTS_PER_RUN", "3"))
 
 SITE_ROOT   = Path(__file__).parent
 BLOG_DIR    = SITE_ROOT / "blog"
@@ -39,43 +38,29 @@ client = OpenAI(
 )
 
 
-# ── Unsplash ───────────────────────────────────────────────────────────────────
+# ── Cover image generator ──────────────────────────────────────────────────────
 
-def fetch_unsplash_image(query, out_dir):
+COVER_SCRIPT = SITE_ROOT / "generate-cover.js"
+
+def generate_cover(title, category, out_dir):
     """
-    Search Unsplash for query, download the top result as cover.jpg.
-    Returns (local_path, alt_text, photographer_name, photo_url) or None on failure.
+    Calls generate-cover.js via Node to render a branded cover.jpg.
+    Returns cover_path or None on failure.
     """
+    import subprocess
+    cover_path = out_dir / "cover.jpg"
     try:
-        resp = requests.get(
-            "https://api.unsplash.com/search/photos",
-            params={"query": query, "per_page": 3, "orientation": "landscape", "content_filter": "high", "order_by": "relevant"},
-            headers={"Authorization": f"Client-ID {UNSPLASH_ACCESS_KEY}"},
-            timeout=10,
+        result = subprocess.run(
+            ["node", str(COVER_SCRIPT), title, category, str(cover_path)],
+            capture_output=True, text=True, timeout=30,
         )
-        resp.raise_for_status()
-        results = resp.json().get("results", [])
-        if not results:
-            print(f"  Unsplash: no results for '{query}'")
+        if result.returncode != 0:
+            print(f"  Cover error: {result.stderr.strip()}")
             return None
-
-        # Pick the result with the most likes — proxy for quality
-        photo       = max(results, key=lambda p: p.get("likes", 0))
-        img_url     = photo["urls"]["full"]
-        alt_text    = photo.get("alt_description") or photo.get("description") or query
-        photographer = photo["user"]["name"]
-        photo_link  = photo["links"]["html"]
-
-        # Download
-        img_resp = requests.get(img_url, timeout=20)
-        img_resp.raise_for_status()
-        cover_path = out_dir / "cover.jpg"
-        cover_path.write_bytes(img_resp.content)
-        print(f"  Cover image: '{alt_text}' by {photographer}")
-        return (cover_path, alt_text.strip(), photographer, photo_link)
-
+        print(f"  Cover generated: {cover_path.name}")
+        return cover_path
     except Exception as e:
-        print(f"  Unsplash error: {e}")
+        print(f"  Cover error: {e}")
         return None
 
 
@@ -524,8 +509,7 @@ OUTPUT FORMAT — return a JSON object with exactly these keys:
 
 {{
   "body": "the full HTML body content as a string",
-  "unsplash_query": "literal 2-3 word Unsplash search query, like a photo editor would search — the actual subject of the image",
-  "cover_alt": "descriptive alt text for the cover image, 10-15 words, includes the topic naturally",
+  "cover_alt": "descriptive alt text for the cover image, 10-15 words, describes the visual concept and includes the core topic keyword naturally — written as if describing what someone would see, not just the post title",
   "screenshot_hints": ["short description of screenshot 1 that would add value", "short description of screenshot 2"]
 }}
 
@@ -543,22 +527,13 @@ BODY content rules:
 - Do not include a CTA — the template adds it.
 - Write between 800 and 1200 words of body content.
 
-UNSPLASH QUERY rules:
-- 2 to 3 words maximum. Literal and visual. Think like a photo editor, not a content strategist.
-- Search for the actual physical subject that best represents the post topic.
-- Good examples: "reddit app", "google search", "bitcoin coin", "laptop coding", "data analytics", "content writing"
-- Bad examples: "content strategy laptop screen", "seo analytics dashboard", "web search interface" — too abstract, returns wrong images
-- For social media topics: use the platform name directly e.g. "reddit logo", "twitter feed"
-- For crypto topics: "bitcoin", "ethereum", "blockchain network"
-- For writing/SEO topics: "writing laptop", "search results", "analytics screen"
-
 Return ONLY the raw JSON. No markdown fences, no explanation.
 """
 
 
 # ── HTML template ──────────────────────────────────────────────────────────────
 
-def build_html(topic, body, dt, cover=None):
+def build_html(topic, body, dt, cover=None, cover_alt=""):
     slug      = topic["slug"]
     title     = topic["title"]
     category  = topic["category"]
@@ -576,11 +551,10 @@ def build_html(topic, body, dt, cover=None):
 
     # Cover image block
     if cover:
-        _, alt_text, photographer, photo_link = cover
+        img_alt = cover_alt if cover_alt else f"Branded cover image for the post: {title}"
         cover_html = f"""
 <div class="post-cover">
-  <img src="/blog/{slug}/cover.jpg" alt="{alt_text}" width="900" height="500" loading="eager">
-  <div class="cover-credit">Photo by <a href="{photo_link}?utm_source=narender_xyz&utm_medium=referral" target="_blank" rel="noopener">{photographer}</a> on <a href="https://unsplash.com?utm_source=narender_xyz&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a></div>
+  <img src="/blog/{slug}/cover.jpg" alt="{img_alt}" width="1200" height="630" loading="eager">
 </div>"""
     else:
         cover_html = ""
@@ -797,14 +771,13 @@ def generate_post(topic):
     except json.JSONDecodeError:
         # Fallback: treat entire response as body, no image metadata
         print("  Warning: could not parse JSON, treating response as plain body")
-        return raw, None, []
+        return raw, "", []
 
     body             = data.get("body", raw)
-    unsplash_query   = data.get("unsplash_query", "")
     cover_alt        = data.get("cover_alt", "")
     screenshot_hints = data.get("screenshot_hints", [])
 
-    return body, unsplash_query, screenshot_hints
+    return body, cover_alt, screenshot_hints
 
 
 # ── Topic picker ───────────────────────────────────────────────────────────────
@@ -885,16 +858,13 @@ def main():
     for i, topic in enumerate(topics, 1):
         print(f"[{i}/{len(topics)}] {topic['title']}")
         try:
-            body, unsplash_query, screenshot_hints = generate_post(topic)
+            body, cover_alt, screenshot_hints = generate_post(topic)
             print(f"  Generated {len(body)} chars, ~{estimate_read_time(body)} min read")
 
-            # Fetch cover image from Unsplash
+            # Generate branded cover image
             out_dir = BLOG_DIR / topic["slug"]
             out_dir.mkdir(parents=True, exist_ok=True)
-            cover = None
-            if unsplash_query:
-                print(f"  Fetching Unsplash image for: '{unsplash_query}'")
-                cover = fetch_unsplash_image(unsplash_query, out_dir)
+            cover = generate_cover(topic["title"], topic["category"], out_dir)
 
             # Print screenshot hints for manual action
             if screenshot_hints:
@@ -902,7 +872,7 @@ def main():
                 for hint in screenshot_hints:
                     print(f"    - {hint}")
 
-            html = build_html(topic, body, now, cover)
+            html = build_html(topic, body, now, cover, cover_alt)
             save_post(topic, html)
             new_slugs.append(topic["slug"])
             new_topics.append(topic)
