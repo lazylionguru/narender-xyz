@@ -211,13 +211,13 @@ const thumbHtml = `<!DOCTYPE html><html><head><meta charset="UTF-8">
 
   const coverPath = path.resolve(outDir, "cover.jpg");
   await page.setViewport({ width: 1200, height: 630, deviceScaleFactor: 2 });
-  await page.setContent(coverHtml, { waitUntil: "networkidle0" });
+  await page.setContent(coverHtml, { waitUntil: "domcontentloaded" });
   await page.screenshot({ path: coverPath, type: "jpeg", quality: 92, clip: { x: 0, y: 0, width: 1200, height: 630 } });
   console.log(`cover: ${coverPath}`);
 
   const thumbPath = path.resolve(outDir, "thumb.jpg");
   await page.setViewport({ width: 600, height: 600, deviceScaleFactor: 2 });
-  await page.setContent(thumbHtml, { waitUntil: "networkidle0" });
+  await page.setContent(thumbHtml, { waitUntil: "domcontentloaded" });
   await page.screenshot({ path: thumbPath, type: "jpeg", quality: 90, clip: { x: 0, y: 0, width: 600, height: 600 } });
   console.log(`thumb: ${thumbPath}`);
 
