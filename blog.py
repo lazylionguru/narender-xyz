@@ -737,25 +737,26 @@ def update_blog_index(new_topics, dt):
         category  = topic["category"]
         cat_class = CAT_CLASSES.get(category, "cat-seo")
         cat_label = CAT_LABELS.get(category, "SEO")
-        read_time = 7  # rough estimate before we have the actual content
+        read_time = 7
 
         cards += f"""
-    <article class="blog-card" data-cat="{category}">
-      <span class="blog-cat {cat_class}">{cat_label}</span>
-      <div class="blog-title"><a href="/blog/{slug}/" style="color:inherit">{title}</a></div>
-      <div class="blog-meta" style="margin-top:auto;padding-top:1rem;">
-        <span class="blog-author">Narender Charan</span>
-        <span class="blog-dot"></span>
-        <span>{date_disp}</span>
-        <span class="blog-dot"></span>
-        <span>{read_time} min read</span>
+    <article class="bpost" data-cat="{category}">
+      <div class="bpost-inner">
+        <div class="bpost-left">
+          <div class="bpost-top"><span class="blog-cat {cat_class}">{cat_label}</span></div>
+          <a class="bpost-title" href="/blog/{slug}/">{title}</a>
+        </div>
+        <div class="bpost-meta">
+          <span>{date_disp}</span>
+          <span class="blog-dot"></span>
+          <span>{read_time} min</span>
+        </div>
       </div>
     </article>
 """
 
-    # Insert after the featured post (first article tag after blog-grid opens)
-    insert_marker = '<div class="blog-grid" id="blog-grid">'
-    featured_end  = '</article>'  # end of the featured card
+    insert_marker = '<div class="blog-list" id="blog-grid">'
+    featured_end  = '</article>'
 
     idx_grid  = content.find(insert_marker)
     idx_feat  = content.find(featured_end, idx_grid)
