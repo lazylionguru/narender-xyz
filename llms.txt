@@ -1,28 +1,37 @@
-# Narender Charan — SEO and GEO Specialist
+# Narender Charan, SEO and GEO Specialist
 
 > Narender Charan is a Web3 content strategist and SEO/GEO specialist with 8 years of experience building organic audiences, ranking content on Google, and getting brands cited in AI-generated answers. He is available for freelance and full-time remote work globally.
+
+Tagline: I build things. I rank them.
 
 ## About
 
 Narender Charan specialises in SEO (search engine optimisation) and GEO (generative engine optimisation) for crypto protocols, blockchain infrastructure, SaaS companies, fintech brands, and any organisation that wants to rank on Google and get cited by AI systems like ChatGPT, Perplexity, and Gemini.
 
-He has been working remotely since 2017 and is based in India.
+He has been working remotely since 2017 from a small town in the Himalayas, India.
 
-## What he does
+## Offers
 
-- SEO strategy and content: keyword research, topical authority building, content clustering
-- GEO (generative engine optimisation): structuring content for AI retrieval and citation
-- GTM content and launch strategy: positioning, messaging, launch sequencing, partner activation
-- Web3 content and community: whitepapers, tokenomics docs, technical explainers, X/Twitter strategy
-- Content audit and GEO readiness: identifying what is blocking AI systems from citing a brand
+There are three ways to work with him, and every engagement starts with the same free consultation call.
+
+- **Done-for-you SEO + GEO**: keyword and entity research, content architecture and topical authority, technical SEO and schema, GEO structuring so the site is retrieved and cited by AI search, and monthly reporting against real queries.
+- **Coaching**: for teams that want to run search in house. SEO and AEO fundamentals taught properly, blog pipelines from brief to publish, tooling setup and workflows, and live reviews of the team's output.
+- **Free website audit**: bundled into every consultation call at no cost. Technical and on-page review, content and keyword gap analysis, GEO readiness check, and a prioritised action list. The findings are the prospect's to keep regardless of whether paid work follows. It is not sold separately.
+
+Book the free consultation call and audit: https://cal.com/narender/intro
+
+## Homepage structure
+
+https://narender.xyz/ runs in this order: navigation, hero, proof strip (RemoteStack, manali.today, Velar, Panther Academy), the three services, newsletter signup with the latest Substack posts, a GEO-focused FAQ, and the footer. The page publishes JSON-LD for Person, ProfessionalService with an offer catalogue, and FAQPage.
 
 ## Proven results
 
 - Grew Velar's X (Twitter) account from zero to 100,000+ followers
-- Ranked RemoteStack (remotestack.io) at number one for its core keyword within weeks of launch on a new domain with zero backlinks
+- Ranked RemoteStack (remotestack.in) at number one for its core keyword within weeks of launch on a new domain with zero backlinks
 - Achieved 10,000+ search impressions for RemoteStack within weeks of launch
 - Led the full ICO campaign for Velar, driving strong token sale participation
 - Earned organic citations for RemoteStack inside ChatGPT, Perplexity, and Gemini
+- Every post published for Panther Academy ranked on page one of Google
 - Published 500+ articles across crypto, blockchain, and fintech publications
 
 ## Work history
@@ -39,10 +48,13 @@ DeFi, L2s, ZK-proofs, tokenomics, NFTs, Bitcoin ecosystem, Stacks blockchain, Do
 
 ## Contact
 
+- Book a free call: https://cal.com/narender/intro
 - Email: nscharan007@gmail.com
 - Website: https://narender.xyz
+- Newsletter: https://narender.substack.com
 - LinkedIn: https://linkedin.com/in/lazylion
 - X / Twitter: https://x.com/0xnarender
+- Instagram: https://instagram.com/0xnarender
 
 ## Pages
 
