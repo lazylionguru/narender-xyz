@@ -8,6 +8,11 @@
      paper    #FAEFDB  modal background of desktop-hero.webp
      ink      #1A3768  mean of the indigo linework
      ink-deep #10203F  darkest linework core
+
+   Terracotta is reserved for one solid element per viewport
+   (the hero CTA, or the nav CTA once the hero is scrolled past)
+   plus the fixed text accents: the .xyz suffix, the second
+   headline line, and the availability dot.
    ============================================================ */
 
 .home-v3 *,
@@ -17,6 +22,7 @@
 .home-v3 {
   margin: 0;
   --h3-paper: #FAEFDB;
+  --h3-paper-2: #F3E8D4;         /* paper darkened ~3%, arch hover fill */
   --h3-ink: #1A3768;
   --h3-ink-deep: #10203F;
   --h3-accent: #C4552D;
@@ -27,12 +33,14 @@
 
   --h3-rule: rgba(26, 55, 104, 0.20);
   --h3-border: rgba(26, 55, 104, 0.25);
+  --h3-line: rgba(26, 55, 104, 0.40);   /* arch outline */
 
   --h3-font: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --h3-font-dev: 'Noto Sans Devanagari', 'Geist', sans-serif;
 
   --h3-gut: clamp(20px, 5vw, 64px);
   --h3-max: 1180px;
+  --h3-nav-h: 84px;
 
   background: var(--h3-paper);
   color: var(--h3-ink);
@@ -54,6 +62,7 @@
   outline-offset: 3px;
   border-radius: 2px;
 }
+.home-v3 [id] { scroll-margin-top: calc(var(--h3-nav-h) + 16px); }
 
 .home-v3 .h3-wrap {
   max-width: var(--h3-max);
@@ -94,21 +103,17 @@
   font: inherit; font-size: 15px; font-weight: 500;
   padding: 13px 22px; border-radius: 2px;
   border: 1px solid transparent; cursor: pointer;
-  transition: background-color .15s ease, color .15s ease;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
 }
 .home-v3 .h3-btn-primary {
   background: var(--h3-accent-ink); color: var(--h3-paper);
+  border-color: var(--h3-accent-ink);
 }
-.home-v3 .h3-btn-primary:hover { background: #8F3A19; }
+.home-v3 .h3-btn-primary:hover { background: #8F3A19; border-color: #8F3A19; }
 .home-v3 .h3-btn-ink {
-  background: var(--h3-ink); color: var(--h3-paper);
+  background: var(--h3-ink); color: var(--h3-paper); border-color: var(--h3-ink);
 }
-.home-v3 .h3-btn-ink:hover { background: var(--h3-ink-deep); }
-.home-v3 .h3-btn-quiet {
-  background: transparent; color: var(--h3-ink);
-  border-color: var(--h3-border);
-}
-.home-v3 .h3-btn-quiet:hover { border-color: var(--h3-ink); }
+.home-v3 .h3-btn-ink:hover { background: var(--h3-ink-deep); border-color: var(--h3-ink-deep); }
 
 .home-v3 .h3-textlink {
   color: var(--h3-ink); text-decoration: underline;
@@ -119,15 +124,25 @@
 
 /* ============================================================
    NAV
+   Fixed, transparent while the hero is on screen, paper-backed
+   after it. Without JS the .is-over-hero class never lands, so
+   the bar keeps its paper background and the CTA stays solid,
+   which is the safe fallback.
    ============================================================ */
 .home-v3 .h3-nav {
-  position: absolute; top: 0; left: 0; right: 0; z-index: 60;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+  background: var(--h3-paper);
+  border-bottom: 1px solid var(--h3-rule);
+  transition: background-color .2s ease, border-color .2s ease;
+}
+.home-v3 .h3-nav.is-over-hero {
   background: transparent;
+  border-bottom-color: transparent;
 }
 .home-v3 .h3-nav-inner {
   max-width: var(--h3-max); margin: 0 auto;
   padding: 0 var(--h3-gut);
-  height: 84px; display: flex; align-items: center; gap: 24px;
+  height: var(--h3-nav-h); display: flex; align-items: center; gap: 24px;
 }
 .home-v3 .h3-logo {
   font-size: 17px; font-weight: 600; letter-spacing: -0.01em;
@@ -144,6 +159,16 @@
   color: var(--h3-accent-ink); border-bottom-color: currentColor;
 }
 .home-v3 .h3-nav-cta { padding: 11px 18px; font-size: 14px; }
+
+/* Ghost variant while the hero owns the one solid terracotta. */
+.home-v3 .h3-nav.is-over-hero .h3-nav-cta {
+  background: transparent;
+  color: var(--h3-accent-ink);
+  border-color: var(--h3-accent-ink);
+}
+.home-v3 .h3-nav.is-over-hero .h3-nav-cta:hover {
+  background: var(--h3-accent-ink); color: var(--h3-paper);
+}
 
 .home-v3 .h3-menu-btn {
   display: none; background: transparent; border: 1px solid var(--h3-border);
@@ -219,9 +244,14 @@
 }
 .home-v3 .h3-hero-ctas {
   margin-top: 30px;
-  display: flex; align-items: center; justify-content: center;
-  gap: 12px 26px; flex-wrap: wrap;
+  display: flex; align-items: flex-start; justify-content: center;
+  gap: 10px 28px; flex-wrap: wrap;
 }
+.home-v3 .h3-cta-block { display: flex; flex-direction: column; align-items: center; }
+.home-v3 .h3-cta-note {
+  margin-top: 11px; font-size: 13px; color: var(--h3-muted);
+}
+.home-v3 .h3-cta-alt { margin-top: 15px; }
 
 /* ============================================================
    PROOF STRIP
@@ -247,76 +277,136 @@
 .home-v3 .h3-section-head { max-width: 62ch; }
 .home-v3 .h3-section-head .h3-h2 { margin-top: 12px; }
 
-/* ---------- services ---------- */
-.home-v3 .h3-cards {
-  margin-top: 44px;
-  display: grid; gap: 20px;
-  grid-template-columns: repeat(3, 1fr);
+/* ============================================================
+   SERVICES — jharokha arch panels
+   The head is an inline SVG in normal flow, so its height tracks
+   the panel width. Side and bottom rails are 1px borders on the
+   body, which the head's vertical stubs meet exactly.
+   ============================================================ */
+.home-v3 .h3-arches {
+  margin-top: 48px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
+  align-items: start;
 }
-.home-v3 .h3-card {
-  border: 1px solid var(--h3-border); border-radius: 2px;
-  padding: 34px 30px 30px;
-  background: transparent; box-shadow: none;
+.home-v3 .h3-arch {
+  position: relative;
+  transition: transform .15s ease;
+}
+.home-v3 .h3-arch-head {
+  display: block; width: 100%; height: auto; overflow: visible;
+}
+.home-v3 .h3-arch-head path {
+  fill: transparent;
+  stroke: var(--h3-ink); stroke-width: 1; stroke-opacity: .4;
+  vector-effect: non-scaling-stroke;
+  transition: fill .15s ease;
+}
+.home-v3 .h3-arch-body {
+  position: relative; margin-top: -1px;
+  border-left: 1px solid var(--h3-line);
+  border-right: 1px solid var(--h3-line);
+  border-bottom: 1px solid var(--h3-line);
+  padding: 26px 32px 52px;
+  transition: background-color .15s ease;
+}
+.home-v3 .h3-arch:hover { transform: translateY(-2px); }
+.home-v3 .h3-arch:hover .h3-arch-head path { fill: var(--h3-paper-2); }
+.home-v3 .h3-arch:hover .h3-arch-body { background: var(--h3-paper-2); }
+
+/* The number and heading sit inside the arch void, resting on the
+   springing line, the way a jharokha niche carries its subject. */
+.home-v3 .h3-arch-title {
+  position: absolute; top: 0; left: 0; right: 0;
+  aspect-ratio: 440 / 240;
   display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-end;
+  text-align: center; padding: 0 17% 26px;
+  pointer-events: none;
 }
-.home-v3 .h3-card-num {
+.home-v3 .h3-arch-num {
   font-size: 12px; letter-spacing: 0.16em; color: var(--h3-muted);
 }
-.home-v3 .h3-card h3 {
-  margin-top: 16px; font-size: 21px; font-weight: 600;
-  line-height: 1.25; letter-spacing: -0.015em; color: var(--h3-ink-deep);
+.home-v3 .h3-arch h3 {
+  margin-top: 12px; font-size: clamp(19px, 1.9vw, 24px); font-weight: 600;
+  line-height: 1.2; letter-spacing: -0.02em; color: var(--h3-ink-deep);
+  text-wrap: balance;
 }
-.home-v3 .h3-card p {
-  margin-top: 12px; font-size: 15.5px; color: var(--h3-muted); line-height: 1.6;
+.home-v3 .h3-arch-desc {
+  font-size: 15.5px; color: var(--h3-muted); line-height: 1.6;
 }
-.home-v3 .h3-card ul {
-  margin-top: 16px; list-style: none;
+.home-v3 .h3-arch ul {
+  margin-top: 18px; list-style: none;
   font-size: 14.5px; color: var(--h3-muted);
 }
-.home-v3 .h3-card li {
-  padding: 7px 0 7px 16px; position: relative;
+.home-v3 .h3-arch li {
+  padding: 9px 0; border-top: 1px solid var(--h3-rule);
+}
+.home-v3 .h3-arch-cta { margin-top: 24px; }
+
+/* slim column bases at the bottom corners */
+.home-v3 .h3-arch-foot {
+  position: absolute; bottom: 0; width: 28px; height: 24px; overflow: visible;
+}
+.home-v3 .h3-arch-foot path {
+  fill: none; stroke: var(--h3-ink); stroke-width: 1; stroke-opacity: .4;
+  vector-effect: non-scaling-stroke;
+}
+.home-v3 .h3-arch-foot-l { left: -1px; }
+.home-v3 .h3-arch-foot-r { right: -1px; transform: scaleX(-1); }
+
+.home-v3 .h3-lintel {
+  margin: 44px auto 0; max-width: 82ch;
+  padding-top: 26px; border-top: 1px solid var(--h3-rule);
+  text-align: center;
+  font-size: 11.5px; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase; line-height: 2.1;
+  color: var(--h3-muted);
+}
+
+/* ============================================================
+   RESULTS
+   ============================================================ */
+.home-v3 .h3-cases {
+  list-style: none; margin-top: 44px;
   border-top: 1px solid var(--h3-rule);
 }
-.home-v3 .h3-card li::before {
-  content: ""; position: absolute; left: 0; top: 19px;
-  width: 6px; height: 1px; background: var(--h3-ink); opacity: .5;
+.home-v3 .h3-case {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.72fr) 2fr minmax(170px, 0.86fr);
+  gap: 6px 32px; align-items: baseline;
+  padding: 26px 0; border-bottom: 1px solid var(--h3-rule);
 }
-.home-v3 .h3-card .h3-card-cta { margin-top: auto; padding-top: 24px; }
+.home-v3 .h3-case-name {
+  font-size: 19px; font-weight: 600; letter-spacing: -0.015em;
+  color: var(--h3-ink-deep);
+}
+.home-v3 .h3-case-name a:hover { color: var(--h3-accent-ink); }
+.home-v3 .h3-case-name span { font-size: 14px; opacity: .55; }
+.home-v3 .h3-case-desc { font-size: 15.5px; color: var(--h3-muted); }
+.home-v3 .h3-case-stat {
+  font-size: 14.5px; color: var(--h3-ink); text-align: right;
+}
 
-/* ---------- newsletter + writing ---------- */
-.home-v3 .h3-news {
-  border-top: 1px solid var(--h3-rule);
-  padding-top: clamp(56px, 7vw, 88px);
+.home-v3 .h3-exp-title {
+  margin-top: 60px;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--h3-muted);
 }
-.home-v3 .h3-news-top {
-  display: grid; grid-template-columns: 1.05fr 1fr;
-  gap: 40px; align-items: start;
-}
-.home-v3 .h3-form { display: flex; gap: 10px; flex-wrap: wrap; }
-.home-v3 .h3-form input[type="email"] {
-  flex: 1 1 240px; min-width: 0;
-  font: inherit; font-size: 15px; color: var(--h3-ink);
-  background: transparent;
-  border: 1px solid var(--h3-border); border-radius: 2px;
-  padding: 13px 14px;
-}
-.home-v3 .h3-form input::placeholder { color: var(--h3-muted); opacity: .8; }
-.home-v3 .h3-form input:focus { outline: 2px solid var(--h3-ink); outline-offset: 1px; }
-.home-v3 .h3-form-note { margin-top: 12px; font-size: 13px; color: var(--h3-muted); }
-
-.home-v3 .h3-posts {
-  margin-top: 48px; display: grid;
-  grid-template-columns: repeat(3, 1fr); gap: 0 28px;
+.home-v3 .h3-exp {
+  list-style: none; margin-top: 18px;
   border-top: 1px solid var(--h3-rule);
 }
-.home-v3 .h3-post { padding: 22px 0 4px; }
-.home-v3 .h3-post time { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--h3-muted); }
-.home-v3 .h3-post h3 { margin-top: 10px; font-size: 17px; font-weight: 600; line-height: 1.35; color: var(--h3-ink-deep); }
-.home-v3 .h3-post a:hover h3 { color: var(--h3-accent-ink); }
-.home-v3 .h3-post p { margin-top: 8px; font-size: 14.5px; color: var(--h3-muted); }
+.home-v3 .h3-exp li {
+  display: grid; grid-template-columns: 210px 1fr; gap: 8px 24px;
+  padding: 12px 0; border-bottom: 1px solid var(--h3-rule);
+}
+.home-v3 .h3-exp-when { font-size: 13.5px; color: var(--h3-muted); }
+.home-v3 .h3-exp-what { font-size: 15px; color: var(--h3-ink); }
 
-/* ---------- FAQ ---------- */
-.home-v3 .h3-faq { margin-top: 40px; border-top: 1px solid var(--h3-rule); max-width: 860px; }
+/* ============================================================
+   FAQ
+   ============================================================ */
+.home-v3 .h3-faq { margin-top: 44px; border-top: 1px solid var(--h3-rule); max-width: 860px; }
 .home-v3 .h3-faq details { border-bottom: 1px solid var(--h3-rule); }
 .home-v3 .h3-faq summary {
   list-style: none; cursor: pointer;
@@ -337,25 +427,83 @@
 
 /* ============================================================
    FOOTER
-   The illustration is split into a scene block and a bottom trim
-   block. Real copy sits on paper between them, so nothing is ever
-   baked into the artwork and nothing collides with the
-   hill-and-deer vignette that lives in the trim.
+   The illustration is split into a scene and a bottom trim block.
+   Real copy sits on paper between them, so nothing is baked into
+   the artwork and nothing collides with the hill-and-deer vignette
+   that lives in the trim. The newsletter block is overlaid on the
+   scene's open sky, which is clear of linework across the middle
+   60% of the image down to 60% of its height on desktop and 74%
+   on mobile.
    ============================================================ */
 .home-v3 .h3-footer { background: var(--h3-paper); margin-top: clamp(40px, 6vw, 72px); }
+.home-v3 .h3-footer-top {
+  position: relative;
+  overflow: hidden; /* clips the newsletter wash, which bleeds past the block */
+}
 .home-v3 .h3-footer-scene,
 .home-v3 .h3-footer-trim { width: 100%; height: auto; }
 .home-v3 .h3-footer-scene { aspect-ratio: 1440 / 757; object-fit: cover; }
 .home-v3 .h3-footer-trim { aspect-ratio: 1440 / 203; object-fit: cover; }
 
+.home-v3 .h3-newsletter {
+  position: absolute; top: 6%; left: 0; right: 0;
+  padding: 0 var(--h3-gut);
+  text-align: center;
+}
+.home-v3 .h3-newsletter::before {
+  content: ""; position: absolute; z-index: 0;
+  left: 50%; top: -8%; transform: translateX(-50%);
+  width: min(860px, 132%); height: 128%;
+  background: radial-gradient(
+    ellipse at 50% 46%,
+    rgba(250, 239, 219, 0.82) 0%,
+    rgba(250, 239, 219, 0.74) 46%,
+    rgba(250, 239, 219, 0.34) 70%,
+    rgba(250, 239, 219, 0) 88%
+  );
+  pointer-events: none;
+}
+.home-v3 .h3-newsletter > * { position: relative; z-index: 1; }
+.home-v3 .h3-newsletter-kicker { color: var(--h3-ink); }
+.home-v3 .h3-newsletter-h {
+  margin-top: 12px;
+  font-size: clamp(24px, 2.8vw, 34px); line-height: 1.15;
+  letter-spacing: -0.02em; font-weight: 600; color: var(--h3-ink-deep);
+}
+.home-v3 .h3-newsletter-p {
+  margin: 12px auto 0; max-width: 54ch;
+  font-size: clamp(14.5px, 1.2vw, 16px); color: var(--h3-muted);
+}
+.home-v3 .h3-newsletter .h3-form {
+  margin: 24px auto 0; max-width: 460px; justify-content: center;
+}
+/* Keeps the note inside the illustration's clear central band, where
+   the edge foliage starts earlier than the sky above the horizon. */
+.home-v3 .h3-newsletter .h3-form-note {
+  text-align: center; max-width: 36ch; margin-left: auto; margin-right: auto;
+}
+
+.home-v3 .h3-form { display: flex; gap: 10px; flex-wrap: wrap; }
+.home-v3 .h3-form input[type="email"] {
+  flex: 1 1 220px; min-width: 0;
+  font: inherit; font-size: 15px; color: var(--h3-ink);
+  background: rgba(250, 239, 219, 0.72);
+  border: 1px solid var(--h3-border); border-radius: 2px;
+  padding: 13px 14px;
+}
+.home-v3 .h3-form input::placeholder { color: var(--h3-muted); opacity: .8; }
+.home-v3 .h3-form input:focus { outline: 2px solid var(--h3-ink); outline-offset: 1px; }
+.home-v3 .h3-form-note { margin-top: 12px; font-size: 13px; color: var(--h3-muted); }
+
 .home-v3 .h3-footer-body {
   max-width: var(--h3-max); margin: 0 auto;
-  padding: 44px var(--h3-gut) 34px;
+  padding: 44px var(--h3-gut) 26px;
 }
 .home-v3 .h3-footer-grid {
   display: grid;
-  grid-template-columns: minmax(240px, 1.2fr) repeat(3, minmax(120px, .72fr)) auto;
-  gap: 36px 32px;
+  grid-template-columns: minmax(230px, 1.15fr) repeat(3, minmax(130px, .78fr)) auto;
+  gap: 36px 30px;
+  align-items: start;
 }
 .home-v3 .h3-footer-brand { font-size: 17px; font-weight: 600; color: var(--h3-ink-deep); }
 .home-v3 .h3-footer-brand em { font-style: normal; color: var(--h3-accent); }
@@ -364,14 +512,15 @@
 
 .home-v3 .h3-footer-col h2 {
   font-size: 11px; font-weight: 600; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--h3-muted);
+  text-transform: uppercase; color: var(--h3-muted); line-height: 1.4;
 }
 .home-v3 .h3-footer-col ul { list-style: none; margin-top: 14px; }
 .home-v3 .h3-footer-col li + li { margin-top: 9px; }
 .home-v3 .h3-footer-col a { font-size: 14.5px; color: var(--h3-ink); }
 .home-v3 .h3-footer-col a:hover { color: var(--h3-accent-ink); text-decoration: underline; text-underline-offset: 3px; }
 
-.home-v3 .h3-social { display: flex; gap: 8px; align-items: flex-start; }
+/* top edge of the icon row lines up with the column headings */
+.home-v3 .h3-social { display: flex; gap: 8px; align-items: flex-start; margin-top: -8px; }
 .home-v3 .h3-social a {
   width: 38px; height: 38px; display: grid; place-items: center;
   border: 1px solid var(--h3-border); border-radius: 2px; color: var(--h3-ink);
@@ -379,11 +528,7 @@
 .home-v3 .h3-social a:hover { border-color: var(--h3-ink); color: var(--h3-accent-ink); }
 .home-v3 .h3-social svg { width: 17px; height: 17px; fill: currentColor; display: block; }
 
-.home-v3 .h3-shloka {
-  text-align: center;
-  /* clears the hill-and-deer vignette, which sits in the trim below */
-  padding: 40px 0 8px;
-}
+.home-v3 .h3-shloka { text-align: center; padding: 26px 0 4px; }
 .home-v3 .h3-shloka p:first-child {
   font-family: var(--h3-font-dev); font-weight: 400;
   font-size: 14px; line-height: 1.9; color: var(--h3-ink);
@@ -401,16 +546,20 @@
    RESPONSIVE
    ============================================================ */
 @media (max-width: 1080px) {
-  .home-v3 .h3-cards { grid-template-columns: 1fr; }
-  .home-v3 .h3-news-top { grid-template-columns: 1fr; gap: 28px; }
-  .home-v3 .h3-posts { grid-template-columns: 1fr; gap: 0; }
-  .home-v3 .h3-post + .h3-post { border-top: 1px solid var(--h3-rule); }
+  .home-v3 .h3-arches { grid-template-columns: 1fr; gap: 40px; }
+  .home-v3 .h3-arch { max-width: 620px; margin: 0 auto; width: 100%; }
+  .home-v3 .h3-case {
+    grid-template-columns: 1fr;
+    gap: 8px; padding: 22px 0;
+  }
+  .home-v3 .h3-case-stat { text-align: left; }
+  .home-v3 .h3-exp li { grid-template-columns: 1fr; gap: 2px; }
 }
 
 @media (max-width: 900px) {
   .home-v3 .h3-footer-grid { grid-template-columns: 1fr 1fr; }
   .home-v3 .h3-footer-brand-block { grid-column: 1 / -1; }
-  .home-v3 .h3-social { grid-column: 1 / -1; }
+  .home-v3 .h3-social { grid-column: 1 / -1; margin-top: 0; }
 }
 
 /* Hero copy sits lower relative to the crop on short desktop
@@ -423,11 +572,11 @@
 }
 
 @media (max-width: 768px) {
-  .home-v3 { font-size: 16px; }
-  .home-v3 .h3-nav-inner { height: 68px; gap: 12px; }
+  .home-v3 { font-size: 16px; --h3-nav-h: 68px; }
+  .home-v3 .h3-nav-inner { gap: 12px; }
   .home-v3 .h3-nav-links {
     display: none;
-    position: absolute; top: 68px; left: var(--h3-gut); right: var(--h3-gut);
+    position: absolute; top: var(--h3-nav-h); left: var(--h3-gut); right: var(--h3-gut);
     flex-direction: column; align-items: stretch; gap: 0;
     background: var(--h3-paper);
     border: 1px solid var(--h3-border); border-radius: 2px;
@@ -452,20 +601,40 @@
   }
   .home-v3 .h3-h1 { margin-top: 18px; }
   .home-v3 .h3-hero-sub { margin-top: 18px; }
-  .home-v3 .h3-hero-ctas { margin-top: 26px; flex-direction: column; align-items: stretch; }
+  .home-v3 .h3-hero-ctas { margin-top: 26px; flex-direction: column; align-items: stretch; gap: 18px; }
+  .home-v3 .h3-cta-block { align-items: stretch; }
   .home-v3 .h3-hero-ctas .h3-btn { width: 100%; }
+  .home-v3 .h3-cta-alt { margin-top: 0; align-self: center; }
 
   .home-v3 .h3-proof p { letter-spacing: 0.14em; font-size: 11px; line-height: 2; }
+
+  .home-v3 .h3-arch-body { padding: 6px 24px 48px; }
+  .home-v3 .h3-lintel { letter-spacing: 0.1em; line-height: 2; }
+
+  .home-v3 .h3-newsletter { top: 4%; }
+  .home-v3 .h3-newsletter::before {
+    width: 150%; height: 132%;
+    background: radial-gradient(
+      ellipse at 50% 46%,
+      rgba(250, 239, 219, 0.93) 0%,
+      rgba(250, 239, 219, 0.88) 52%,
+      rgba(250, 239, 219, 0.42) 74%,
+      rgba(250, 239, 219, 0) 90%
+    );
+  }
+  .home-v3 .h3-newsletter-h { margin-top: 10px; }
+  .home-v3 .h3-newsletter .h3-form { max-width: 100%; margin-top: 20px; }
+  .home-v3 .h3-newsletter .h3-form input[type="email"] { flex: 1 1 100%; }
+  .home-v3 .h3-newsletter .h3-form .h3-btn { width: 100%; }
 
   .home-v3 .h3-footer-scene { aspect-ratio: 828 / 1273; }
   .home-v3 .h3-footer-trim { aspect-ratio: 828 / 198; }
   .home-v3 .h3-footer-grid { grid-template-columns: 1fr 1fr; gap: 30px 24px; }
   .home-v3 .h3-footer-body { padding-top: 36px; }
-  /* The mobile vignette sits centre-right in the trim; keep the
-     shloka well clear of it. */
-  .home-v3 .h3-shloka { padding: 34px 0 4px; }
+  .home-v3 .h3-shloka { padding: 22px 0 4px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .home-v3 * { transition: none !important; }
+  .home-v3 .h3-arch:hover { transform: none; }
 }

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Narender Charan, SEO and GEO Specialist</title>
-  <meta name="description" content="SEO and GEO specialist. I ship real products, then make sure Google and AI find them first. Done-for-you SEO and GEO, coaching for in-house teams, and a free site audit on every consultation call.">
+  <meta name="description" content="SEO and GEO specialist. I ship real products, then make sure Google and AI find them first. Done-for-you SEO and GEO, or coaching so your team runs it. Every consultation call includes a full site audit.">
   <meta name="author" content="Narender Charan">
   <meta property="og:title" content="Narender Charan, SEO and GEO Specialist">
   <meta property="og:description" content="I build things. I rank them.">
@@ -38,15 +38,15 @@
 
 <!-- ------------------------------------------------------------------
      Single-source booking and newsletter endpoints.
-     CAL_URL      — every primary CTA on this page opens this link.
-     SUBSTACK_URL — newsletter form target and RSS source.
+     CAL_URL      is the destination of every primary call to action.
+     SUBSTACK_URL is the newsletter form target.
      Both are also written into the markup below as static hrefs so the
      page works with JavaScript disabled. Change them in one place: the
      script block immediately after this comment.
      ------------------------------------------------------------------ -->
 <script>
   const CAL_URL = "https://cal.com/narender/intro";
-  const SUBSTACK_URL = "https://narender.substack.com";
+  const SUBSTACK_URL = "https://narendercharan.substack.com";
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("a[data-cal]").forEach(function (a) { a.href = CAL_URL; });
     document.querySelectorAll("form[data-substack]").forEach(function (f) { f.action = SUBSTACK_URL + "/api/v1/free"; });
@@ -55,7 +55,7 @@
 
 <a class="h3-skip" href="#main">Skip to content</a>
 
-<nav class="h3-nav" aria-label="Primary">
+<nav class="h3-nav" id="h3-nav" aria-label="Primary">
   <div class="h3-nav-inner">
     <a class="h3-logo" href="/">narender<em>.xyz</em></a>
 
@@ -80,7 +80,7 @@
 <main id="main">
 
   <!-- ============================ HERO ============================ -->
-  <section class="h3-hero">
+  <section class="h3-hero" id="h3-hero">
     <picture>
       <source media="(max-width: 768px)" srcset="/img/mobile-hero.webp" type="image/webp">
       <img class="h3-hero-img" src="/img/desktop-hero.webp" alt=""
@@ -92,120 +92,153 @@
 
       <h1 class="h3-h1">I build things.<span>I rank them.</span></h1>
 
-      <p class="h3-hero-sub">SEO and GEO specialist. I ship real products, then make sure Google and AI find them first. Eight years remote, working from a small town in the Himalayas.</p>
+      <p class="h3-hero-sub">SEO and GEO specialist. I ship real products, then make sure Google and AI find them first. Eight years of doing this for Web3, DeFi, and SaaS teams.</p>
 
       <div class="h3-hero-ctas">
-        <a class="h3-btn h3-btn-primary" data-cal href="https://cal.com/narender/intro">Let's talk, it's just an email</a>
-        <a class="h3-textlink" href="#results">See the work</a>
+        <div class="h3-cta-block">
+          <a class="h3-btn h3-btn-primary" data-cal href="https://cal.com/narender/intro">Book a free call</a>
+          <p class="h3-cta-note">30 minutes, includes a full site audit.</p>
+        </div>
+        <a class="h3-textlink h3-cta-alt" href="#results">See the work</a>
       </div>
     </div>
   </section>
 
   <!-- ========================= PROOF STRIP ========================= -->
-  <section class="h3-proof" id="results" aria-label="Selected work">
-    <p>RemoteStack &middot; manali.today &middot; Velar &middot; Panther Academy</p>
+  <section class="h3-proof" aria-label="Selected work">
+    <p>Kymo &middot; RemoteStack &middot; manali.today &middot; Velar &middot; Panther Academy</p>
   </section>
 
   <!-- ========================== SERVICES =========================== -->
   <section class="h3-section h3-wrap" id="services">
     <div class="h3-section-head">
       <p class="h3-eyebrow">What I do</p>
-      <h2 class="h3-h2">Three ways to work together.</h2>
+      <h2 class="h3-h2">Two ways to work together.</h2>
       <p class="h3-lede">Every engagement starts the same way: a free consultation call with a full audit of your site, so we both know what we are dealing with before anyone commits.</p>
     </div>
 
-    <div class="h3-cards">
-      <article class="h3-card">
-        <p class="h3-card-num">01</p>
-        <h3>Done-for-you SEO + GEO</h3>
-        <p>I run the whole search function. Keyword and entity research, content architecture, technical fixes, and the structure that gets you retrieved and cited inside ChatGPT, Perplexity, Gemini, and AI Overviews.</p>
-        <ul>
-          <li>Topical authority and content clusters</li>
-          <li>Technical SEO and schema</li>
-          <li>GEO structuring for AI citation</li>
-          <li>Monthly reporting against real queries</li>
-        </ul>
-        <p class="h3-card-cta"><a class="h3-textlink" data-cal href="https://cal.com/narender/intro">Book a free call</a></p>
+    <div class="h3-arches">
+
+      <article class="h3-arch">
+        <!-- Rajasthani cusped multifoil arch, seven lobes per side, drawn as a
+             single path. vector-effect keeps the stroke at 1px at any size. -->
+        <svg class="h3-arch-head" viewBox="-20 0 440 240" aria-hidden="true" focusable="false">
+          <path d="M-20 240 V224 H0 A19.4 19.4 0 0 0 4.8 185.4 A19.4 19.4 0 0 0 18.9 149.2 A19.4 19.4 0 0 0 41.0 117.3 A19.4 19.4 0 0 0 69.6 90.9 A19.4 19.4 0 0 0 103.0 71.1 A19.4 19.4 0 0 0 139.6 58.2 A19.4 19.4 0 0 0 178.1 52.3 L200 8 L221.9 52.3 A19.4 19.4 0 0 0 260.4 58.2 A19.4 19.4 0 0 0 297.0 71.1 A19.4 19.4 0 0 0 330.4 90.9 A19.4 19.4 0 0 0 359.0 117.3 A19.4 19.4 0 0 0 381.1 149.2 A19.4 19.4 0 0 0 395.2 185.4 A19.4 19.4 0 0 0 400.0 224.0 H420 V240"/>
+        </svg>
+
+        <div class="h3-arch-title">
+          <p class="h3-arch-num">01</p>
+          <h3>Done-for-you SEO + GEO</h3>
+        </div>
+
+        <div class="h3-arch-body">
+          <p class="h3-arch-desc">I run the whole search function. Keyword and entity research, content architecture, technical fixes, and the structure that gets you retrieved and cited inside ChatGPT, Perplexity, Gemini, and AI Overviews.</p>
+          <ul>
+            <li>Topical authority and content clusters</li>
+            <li>Technical SEO and schema</li>
+            <li>GEO structuring for AI citation</li>
+            <li>Monthly reporting against real queries</li>
+          </ul>
+          <p class="h3-arch-cta"><a class="h3-textlink" data-cal href="https://cal.com/narender/intro">Book a free call</a></p>
+
+          <svg class="h3-arch-foot h3-arch-foot-l" viewBox="0 0 28 24" aria-hidden="true" focusable="false">
+            <path d="M0 20 H24 M3 20 V14 H19 M7 14 V8 H15"/>
+          </svg>
+          <svg class="h3-arch-foot h3-arch-foot-r" viewBox="0 0 28 24" aria-hidden="true" focusable="false">
+            <path d="M0 20 H24 M3 20 V14 H19 M7 14 V8 H15"/>
+          </svg>
+        </div>
       </article>
 
-      <article class="h3-card" id="coaching">
-        <p class="h3-card-num">02</p>
-        <h3>Coaching</h3>
-        <p>For teams that want to own this in house. I teach SEO and AEO fundamentals, set up your blog pipeline end to end, and get your people fluent in the tooling so the work continues after I leave.</p>
-        <ul>
-          <li>SEO and AEO fundamentals, taught properly</li>
-          <li>Blog pipelines from brief to publish</li>
-          <li>Tooling setup and workflows</li>
-          <li>Live reviews of your team's output</li>
-        </ul>
-        <p class="h3-card-cta"><a class="h3-textlink" data-cal href="https://cal.com/narender/intro">Book a free call</a></p>
+      <article class="h3-arch" id="coaching">
+        <svg class="h3-arch-head" viewBox="-20 0 440 240" aria-hidden="true" focusable="false">
+          <path d="M-20 240 V224 H0 A19.4 19.4 0 0 0 4.8 185.4 A19.4 19.4 0 0 0 18.9 149.2 A19.4 19.4 0 0 0 41.0 117.3 A19.4 19.4 0 0 0 69.6 90.9 A19.4 19.4 0 0 0 103.0 71.1 A19.4 19.4 0 0 0 139.6 58.2 A19.4 19.4 0 0 0 178.1 52.3 L200 8 L221.9 52.3 A19.4 19.4 0 0 0 260.4 58.2 A19.4 19.4 0 0 0 297.0 71.1 A19.4 19.4 0 0 0 330.4 90.9 A19.4 19.4 0 0 0 359.0 117.3 A19.4 19.4 0 0 0 381.1 149.2 A19.4 19.4 0 0 0 395.2 185.4 A19.4 19.4 0 0 0 400.0 224.0 H420 V240"/>
+        </svg>
+
+        <div class="h3-arch-title">
+          <p class="h3-arch-num">02</p>
+          <h3>Coaching</h3>
+        </div>
+
+        <div class="h3-arch-body">
+          <p class="h3-arch-desc">For teams that want to own this in house. I teach SEO and AEO fundamentals, set up your blog pipeline end to end, and get your people fluent in the tooling so the work continues after I leave.</p>
+          <ul>
+            <li>SEO and AEO fundamentals, taught properly</li>
+            <li>Blog pipelines from brief to publish</li>
+            <li>Tooling setup and workflows</li>
+            <li>Live reviews of your team's output</li>
+          </ul>
+          <p class="h3-arch-cta"><a class="h3-textlink" data-cal href="https://cal.com/narender/intro">Book a free call</a></p>
+
+          <svg class="h3-arch-foot h3-arch-foot-l" viewBox="0 0 28 24" aria-hidden="true" focusable="false">
+            <path d="M0 20 H24 M3 20 V14 H19 M7 14 V8 H15"/>
+          </svg>
+          <svg class="h3-arch-foot h3-arch-foot-r" viewBox="0 0 28 24" aria-hidden="true" focusable="false">
+            <path d="M0 20 H24 M3 20 V14 H19 M7 14 V8 H15"/>
+          </svg>
+        </div>
       </article>
 
-      <article class="h3-card">
-        <p class="h3-card-num">03</p>
-        <h3>Free website audit</h3>
-        <p>Every consultation call includes a full audit of your site. What is ranking, what should be, what is technically broken, and what is stopping AI systems from citing you. You keep the findings either way.</p>
-        <ul>
-          <li>Technical and on-page review</li>
-          <li>Content and keyword gap analysis</li>
-          <li>GEO readiness check</li>
-          <li>Prioritised action list you can act on</li>
-        </ul>
-        <p class="h3-card-cta"><a class="h3-textlink" data-cal href="https://cal.com/narender/intro">Book a free call</a></p>
-      </article>
     </div>
+
+    <p class="h3-lintel">The audit is yours to keep either way, including a report of which AI crawlers already read your site, measured with Kymo, the analytics tool I built.</p>
   </section>
 
-  <!-- ===================== NEWSLETTER + WRITING ==================== -->
-  <section class="h3-section h3-wrap" id="writing">
-    <div class="h3-news">
-      <div class="h3-news-top">
-        <div>
-          <p class="h3-eyebrow">Newsletter</p>
-          <h2 class="h3-h2">Notes on search, written weekly.</h2>
-          <p class="h3-lede">What is actually working in SEO and GEO right now, from the sites I am ranking this month.</p>
-        </div>
-
-        <div>
-          <!-- Posts to SUBSTACK_URL/api/v1/free (see constant at top of body). -->
-          <form class="h3-form" data-substack method="post" target="_blank"
-                action="https://narender.substack.com/api/v1/free">
-            <label class="h3-vh" for="h3-email">Email address</label>
-            <input id="h3-email" type="email" name="email" required
-                   placeholder="you@company.com" autocomplete="email">
-            <button class="h3-btn h3-btn-ink" type="submit">Subscribe</button>
-          </form>
-          <p class="h3-form-note">One email a week. Unsubscribe whenever you like.</p>
-        </div>
-      </div>
-
-      <!-- The three entries below are populated at build time from the
-           Substack RSS feed at SUBSTACK_URL/feed. Replace title, date,
-           excerpt, and href for each item. -->
-      <div class="h3-posts">
-        <article class="h3-post">
-          <a href="https://narender.substack.com">
-            <time datetime="2026-07-24">24 July 2026</time>
-            <h3>Post title from RSS item one</h3>
-            <p>One-line excerpt pulled from the feed description.</p>
-          </a>
-        </article>
-        <article class="h3-post">
-          <a href="https://narender.substack.com">
-            <time datetime="2026-07-17">17 July 2026</time>
-            <h3>Post title from RSS item two</h3>
-            <p>One-line excerpt pulled from the feed description.</p>
-          </a>
-        </article>
-        <article class="h3-post">
-          <a href="https://narender.substack.com">
-            <time datetime="2026-07-10">10 July 2026</time>
-            <h3>Post title from RSS item three</h3>
-            <p>One-line excerpt pulled from the feed description.</p>
-          </a>
-        </article>
-      </div>
+  <!-- =========================== RESULTS =========================== -->
+  <section class="h3-section h3-wrap" id="results">
+    <div class="h3-section-head">
+      <p class="h3-eyebrow">Built and ranked</p>
+      <h2 class="h3-h2">Products I own, and the work behind them.</h2>
+      <p class="h3-lede">Every claim below ties to something you can open in another tab today.</p>
     </div>
+
+    <ol class="h3-cases">
+      <li class="h3-case">
+        <div class="h3-case-name">
+          <a href="https://kymo.in" target="_blank" rel="noopener">Kymo <span aria-hidden="true">&#8599;</span></a>
+        </div>
+        <p class="h3-case-desc">Web analytics I built that tracks both audiences: humans on your site, and the AI crawlers reading it. The instrument behind RemoteStack.</p>
+        <p class="h3-case-stat">Live product, paid subscribers.</p>
+      </li>
+
+      <li class="h3-case">
+        <div class="h3-case-name">
+          <a href="https://remotestack.in" target="_blank" rel="noopener">RemoteStack <span aria-hidden="true">&#8599;</span></a>
+        </div>
+        <p class="h3-case-desc">An AI-assisted remote job board I built solo, launched on a brand new domain with zero backlinks. It now earns organic citations inside ChatGPT, Perplexity, and Gemini.</p>
+        <p class="h3-case-stat">Ranked first for its own name within weeks.</p>
+      </li>
+
+      <li class="h3-case">
+        <div class="h3-case-name">
+          <a href="https://manali.today" target="_blank" rel="noopener">manali.today <span aria-hidden="true">&#8599;</span></a>
+        </div>
+        <p class="h3-case-desc">Live snow and road conditions for Manali, Himachal Pradesh, updated in real time by someone who actually lives there.</p>
+        <p class="h3-case-stat">18,000 daily searches in the target query set.</p>
+      </li>
+
+      <li class="h3-case">
+        <div class="h3-case-name">Velar</div>
+        <p class="h3-case-desc">Built the content and marketing function from scratch for Bitcoin DeFi on Stacks. I wrote the tagline "world's first Bitcoin Perpdex" and treated it as a keyword, then led the ICO campaign end to end.</p>
+        <p class="h3-case-stat">Zero to 100k followers on X.</p>
+      </li>
+
+      <li class="h3-case">
+        <div class="h3-case-name">Panther Academy</div>
+        <p class="h3-case-desc">A technical education hub for Panther Protocol covering ZK-proofs, MEV, zkEVMs, and DeFi infrastructure. Keyword research, architecture, and the writing itself.</p>
+        <p class="h3-case-stat">100% of published posts ranked page one.</p>
+      </li>
+    </ol>
+
+    <h3 class="h3-exp-title">Where I built this</h3>
+    <ul class="h3-exp">
+      <li><span class="h3-exp-when">Jul to Dec 2025</span><span class="h3-exp-what">GTM Strategy Manager, DogeOS</span></li>
+      <li><span class="h3-exp-when">May 2023 to Jun 2025</span><span class="h3-exp-what">Head of Content and Marketing, Velar</span></li>
+      <li><span class="h3-exp-when">Jun to Dec 2022</span><span class="h3-exp-what">Content and Social Manager, Panther Protocol</span></li>
+      <li><span class="h3-exp-when">Jan 2021 to May 2022</span><span class="h3-exp-what">Head of Content, HyperLinq</span></li>
+      <li><span class="h3-exp-when">Oct 2017 to Oct 2020</span><span class="h3-exp-what">Freelance Web3 writer, independent and remote</span></li>
+      <li><span class="h3-exp-when">Sep 2016 to Sep 2017</span><span class="h3-exp-what">Associate Editor, Pricebaba</span></li>
+    </ul>
   </section>
 
   <!-- ============================= FAQ ============================= -->
@@ -231,11 +264,11 @@
       </details>
       <details>
         <summary>How is this different from a typical SEO agency?</summary>
-        <p class="h3-faq-a">I am one person who has built audiences, ranked pages, and shipped real products end to end. RemoteStack and manali.today are products I built solo and ranked myself. The advice is grounded in things I have actually done, so you get a working method rather than a deliverables checklist.</p>
+        <p class="h3-faq-a">I am one person who has built audiences, ranked pages, and shipped real products end to end. Kymo, RemoteStack, and manali.today are products I built solo and ranked myself. The advice is grounded in things I have actually done, so you get a working method rather than a deliverables checklist.</p>
       </details>
       <details>
         <summary>What does the free website audit include?</summary>
-        <p class="h3-faq-a">Every consultation call includes a full site audit at no cost. I review technical health, on-page structure, content and keyword gaps, and GEO readiness, then hand back a prioritised action list. The findings are yours whether or not we work together.</p>
+        <p class="h3-faq-a">Every consultation call includes a full site audit at no cost. I review technical health, on-page structure, content and keyword gaps, and GEO readiness, and I include a report of which AI crawlers already read your site, measured with Kymo. The findings are yours whether or not we work together.</p>
       </details>
     </div>
   </section>
@@ -244,43 +277,63 @@
 
 <!-- ============================ FOOTER ============================= -->
 <footer class="h3-footer">
-  <picture>
-    <source media="(max-width: 768px)" srcset="/img/mobile-footer-scene.webp" type="image/webp">
-    <img class="h3-footer-scene" src="/img/desktop-footer-scene.webp" alt=""
-         width="1440" height="757" loading="lazy" decoding="async">
-  </picture>
+
+  <div class="h3-footer-top">
+    <picture>
+      <source media="(max-width: 768px)" srcset="/img/mobile-footer-scene.webp" type="image/webp">
+      <img class="h3-footer-scene" src="/img/desktop-footer-scene.webp" alt=""
+           width="1440" height="757" loading="lazy" decoding="async">
+    </picture>
+
+    <div class="h3-newsletter" id="writing">
+      <p class="h3-eyebrow h3-newsletter-kicker">Building at 2,050m</p>
+      <h2 class="h3-newsletter-h">The unfiltered build log.</h2>
+      <p class="h3-newsletter-p">I build tiny internet businesses from a Himalayan town and write down everything: ideas, launches, failures, and the hunt for the first paid customer.</p>
+
+      <form class="h3-form" data-substack method="post" target="_blank"
+            action="https://narendercharan.substack.com/api/v1/free">
+        <label class="h3-vh" for="h3-email">Email address</label>
+        <input id="h3-email" type="email" name="email" required
+               placeholder="you@company.com" autocomplete="email">
+        <button class="h3-btn h3-btn-ink" type="submit">Subscribe</button>
+      </form>
+      <p class="h3-form-note">Free. One email whenever there's something worth saying.</p>
+    </div>
+  </div>
 
   <div class="h3-footer-body">
     <div class="h3-footer-grid">
       <div class="h3-footer-brand-block">
         <p class="h3-footer-brand">narender<em>.xyz</em></p>
         <p class="h3-footer-tag">I build things. I rank them.</p>
-        <p class="h3-footer-loc">Remote-first, from the Himalayas.</p>
+        <p class="h3-footer-loc">Building and ranking things since 2017.</p>
       </div>
 
       <div class="h3-footer-col">
-        <h2>Services</h2>
+        <h2>Work with me</h2>
         <ul>
           <li><a href="#services">Done-for-you SEO + GEO</a></li>
           <li><a href="#coaching">Coaching</a></li>
-          <li><a data-cal href="https://cal.com/narender/intro">Free website audit</a></li>
+          <li><a data-cal href="https://cal.com/narender/intro">Book a free call</a></li>
         </ul>
       </div>
 
       <div class="h3-footer-col">
-        <h2>Results</h2>
+        <h2>Built and ranked</h2>
         <ul>
+          <li><a href="https://kymo.in" target="_blank" rel="noopener">Kymo</a></li>
           <li><a href="https://remotestack.in" target="_blank" rel="noopener">RemoteStack</a></li>
           <li><a href="https://manali.today" target="_blank" rel="noopener">manali.today</a></li>
-          <li><a href="#results">Velar and Panther</a></li>
+          <li><a href="#results">Velar</a></li>
+          <li><a href="#results">Panther Academy</a></li>
         </ul>
       </div>
 
       <div class="h3-footer-col">
-        <h2>Company</h2>
+        <h2>Elsewhere</h2>
         <ul>
           <li><a href="/blog/">Blog</a></li>
-          <li><a href="#faq">FAQ</a></li>
+          <li><a href="https://narendercharan.substack.com" target="_blank" rel="noopener">Building at 2,050m</a></li>
           <li><a href="mailto:nscharan007@gmail.com">Contact</a></li>
         </ul>
       </div>
@@ -310,26 +363,40 @@
          width="1440" height="203" loading="lazy" decoding="async">
   </picture>
 
-  <p class="h3-colophon">&copy; 2026 Narender Charan &middot; SEO and GEO Specialist &middot; Remote since 2017</p>
+  <p class="h3-colophon">&copy; 2026 Narender Charan &middot; I build things. I rank them.</p>
 </footer>
 
 <script>
   (function () {
     var btn = document.getElementById("h3-menu-btn");
     var links = document.getElementById("h3-nav-links");
-    if (!btn || !links) return;
-    btn.addEventListener("click", function () {
-      var open = links.classList.toggle("is-open");
-      btn.setAttribute("aria-expanded", String(open));
-      btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    });
-    links.addEventListener("click", function (e) {
-      if (e.target.tagName === "A") {
-        links.classList.remove("is-open");
-        btn.setAttribute("aria-expanded", "false");
-        btn.setAttribute("aria-label", "Open menu");
-      }
-    });
+    if (btn && links) {
+      btn.addEventListener("click", function () {
+        var open = links.classList.toggle("is-open");
+        btn.setAttribute("aria-expanded", String(open));
+        btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      });
+      links.addEventListener("click", function (e) {
+        if (e.target.tagName === "A") {
+          links.classList.remove("is-open");
+          btn.setAttribute("aria-expanded", "false");
+          btn.setAttribute("aria-label", "Open menu");
+        }
+      });
+    }
+
+    // The nav CTA is a terracotta ghost button while the hero is on screen,
+    // so the hero's own solid CTA stays the only filled accent. Once the hero
+    // is fully scrolled past, the nav CTA becomes the solid one. Without JS
+    // the class is never applied and the CTA stays solid, which is the
+    // correct fallback.
+    var nav = document.getElementById("h3-nav");
+    var hero = document.getElementById("h3-hero");
+    if (nav && hero && "IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        nav.classList.toggle("is-over-hero", entries[0].isIntersecting);
+      }, { threshold: 0 }).observe(hero);
+    }
   })();
 </script>
 
@@ -351,13 +418,36 @@
         "Answer engine optimisation",
         "Content strategy",
         "Technical SEO",
+        "Web analytics",
         "Web3 content"
+      ],
+      "owns": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "Kymo",
+          "url": "https://kymo.in",
+          "applicationCategory": "BusinessApplication",
+          "description": "Web analytics that tracks both audiences: humans on your site, and the AI crawlers reading it."
+        },
+        {
+          "@type": "WebSite",
+          "name": "RemoteStack",
+          "url": "https://remotestack.in",
+          "description": "An AI-assisted remote job board."
+        },
+        {
+          "@type": "WebSite",
+          "name": "manali.today",
+          "url": "https://manali.today",
+          "description": "Live snow and road conditions for Manali, Himachal Pradesh."
+        }
       ],
       "sameAs": [
         "https://x.com/0xnarender",
         "https://linkedin.com/in/lazylion",
         "https://instagram.com/0xnarender",
-        "https://narender.substack.com"
+        "https://narendercharan.substack.com",
+        "https://kymo.in"
       ]
     },
     {
@@ -366,7 +456,7 @@
       "name": "narender.xyz",
       "url": "https://narender.xyz",
       "image": "https://narender.xyz/og-home.jpg",
-      "description": "Done-for-you SEO and GEO, coaching for in-house teams, and a free website audit included with every consultation call.",
+      "description": "Done-for-you SEO and GEO, or coaching so your team runs it in house. Every consultation call includes a free full website audit.",
       "slogan": "I build things. I rank them.",
       "provider": { "@id": "https://narender.xyz/#person" },
       "founder": { "@id": "https://narender.xyz/#person" },
@@ -377,7 +467,7 @@
         "https://x.com/0xnarender",
         "https://linkedin.com/in/lazylion",
         "https://instagram.com/0xnarender",
-        "https://narender.substack.com"
+        "https://narendercharan.substack.com"
       ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
@@ -398,18 +488,19 @@
               "name": "Coaching",
               "description": "Teaching SEO and AEO fundamentals, blog pipelines, and tooling so in-house teams run search themselves."
             }
-          },
-          {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Free website audit",
-              "description": "Every consultation call includes a full site audit covering technical health, on-page structure, content gaps, and GEO readiness."
-            }
           }
         ]
+      },
+      "makesOffer": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Free consultation call with full website audit",
+          "description": "A 30 minute consultation call that includes a full site audit: technical health, on-page structure, content and keyword gaps, GEO readiness, and a report of which AI crawlers already read the site."
+        },
+        "url": "https://cal.com/narender/intro"
       }
     },
     {
@@ -445,7 +536,7 @@
           "name": "How is this different from a typical SEO agency?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "I am one person who has built audiences, ranked pages, and shipped real products end to end. RemoteStack and manali.today are products I built solo and ranked myself. The advice is grounded in things I have actually done, so you get a working method rather than a deliverables checklist."
+            "text": "I am one person who has built audiences, ranked pages, and shipped real products end to end. Kymo, RemoteStack, and manali.today are products I built solo and ranked myself. The advice is grounded in things I have actually done, so you get a working method rather than a deliverables checklist."
           }
         },
         {
@@ -453,7 +544,7 @@
           "name": "What does the free website audit include?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Every consultation call includes a full site audit at no cost. I review technical health, on-page structure, content and keyword gaps, and GEO readiness, then hand back a prioritised action list. The findings are yours whether or not we work together."
+            "text": "Every consultation call includes a full site audit at no cost. I review technical health, on-page structure, content and keyword gaps, and GEO readiness, and I include a report of which AI crawlers already read your site, measured with Kymo. The findings are yours whether or not we work together."
           }
         }
       ]
