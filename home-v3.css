@@ -22,7 +22,6 @@
 .home-v3 {
   margin: 0;
   --h3-paper: #FAEFDB;
-  --h3-paper-2: #F3E8D4;         /* paper darkened ~3%, arch hover fill */
   --h3-ink: #1A3768;
   --h3-ink-deep: #10203F;
   --h3-accent: #C4552D;
@@ -33,7 +32,6 @@
 
   --h3-rule: rgba(26, 55, 104, 0.20);
   --h3-border: rgba(26, 55, 104, 0.25);
-  --h3-line: rgba(26, 55, 104, 0.40);   /* arch outline */
 
   --h3-font: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --h3-font-dev: 'Noto Sans Devanagari', 'Geist', sans-serif;
@@ -273,86 +271,79 @@
 /* ============================================================
    SECTIONS
    ============================================================ */
-.home-v3 .h3-section { padding: clamp(64px, 9vw, 116px) 0; }
+/* Vertical only. A shorthand here would beat .h3-wrap on source order and
+   strip the horizontal gutter from every section that carries both classes. */
+.home-v3 .h3-section {
+  padding-top: clamp(64px, 9vw, 116px);
+  padding-bottom: clamp(64px, 9vw, 116px);
+}
 .home-v3 .h3-section-head { max-width: 62ch; }
 .home-v3 .h3-section-head .h3-h2 { margin-top: 12px; }
 
 /* ============================================================
-   SERVICES — jharokha arch panels
-   The head is an inline SVG in normal flow, so its height tracks
-   the panel width. Side and bottom rails are 1px borders on the
-   body, which the head's vertical stubs meet exactly.
-   ============================================================ */
-.home-v3 .h3-arches {
-  margin-top: 48px;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
-  align-items: start;
-}
-.home-v3 .h3-arch {
-  position: relative;
-  transition: transform .15s ease;
-}
-.home-v3 .h3-arch-head {
-  display: block; width: 100%; height: auto; overflow: visible;
-}
-.home-v3 .h3-arch-head path {
-  fill: transparent;
-  stroke: var(--h3-ink); stroke-width: 1; stroke-opacity: .4;
-  vector-effect: non-scaling-stroke;
-  transition: fill .15s ease;
-}
-.home-v3 .h3-arch-body {
-  position: relative; margin-top: -1px;
-  border-left: 1px solid var(--h3-line);
-  border-right: 1px solid var(--h3-line);
-  border-bottom: 1px solid var(--h3-line);
-  padding: 26px 32px 52px;
-  transition: background-color .15s ease;
-}
-.home-v3 .h3-arch:hover { transform: translateY(-2px); }
-.home-v3 .h3-arch:hover .h3-arch-head path { fill: var(--h3-paper-2); }
-.home-v3 .h3-arch:hover .h3-arch-body { background: var(--h3-paper-2); }
+   SERVICES — illustrated chhatri panels
 
-/* The number and heading sit inside the arch void, resting on the
-   springing line, the way a jharokha niche carries its subject. */
-.home-v3 .h3-arch-title {
-  position: absolute; top: 0; left: 0; right: 0;
-  aspect-ratio: 440 / 240;
+   Geometry, measured off img/chhatri-frame.webp (1134x1387):
+     the arch opening is clear of linework from y 0.44 downward,
+     spanning x 0.297..0.707 at y 0.47 and widening to
+     x 0.245..0.759 by y 0.63, then narrowing to x 0.292..0.713
+     at y 0.95 where the plinths end.
+   The content box therefore sits at top 47%, inset 27% each side,
+   with the number and title capped to 85% of that box so they clear
+   the tighter part of the curve above.
+
+   Type scales with the panel via container query units, so it steps
+   down long before anything can touch the linework.
+   ============================================================ */
+.home-v3 .h3-panels {
+  margin-top: 48px;
+  display: grid; gap: clamp(40px, 5vw, 64px);
+  justify-items: center;
+}
+.home-v3 .h3-panel {
+  position: relative;
+  width: 100%; max-width: 780px;
+  aspect-ratio: 1134 / 1387;
+  container-type: inline-size;
+}
+.home-v3 .h3-panel-frame {
+  position: absolute; inset: 0;
+  background: url("/img/chhatri-frame.webp") center / contain no-repeat;
+}
+/* The illustration is near symmetric, so this reads as a subtle
+   variation rather than an obvious flip. Background layer only. */
+.home-v3 .h3-panel:nth-of-type(2) .h3-panel-frame { transform: scaleX(-1); }
+
+.home-v3 .h3-panel-inner {
+  position: absolute;
+  top: 47%; left: 28.5%; right: 28.5%; bottom: 6%;
   display: flex; flex-direction: column;
-  align-items: center; justify-content: flex-end;
-  text-align: center; padding: 0 17% 26px;
-  pointer-events: none;
+  font-size: clamp(10.5px, 1.95cqw, 15px);
+  line-height: 1.55;
 }
-.home-v3 .h3-arch-num {
-  font-size: 12px; letter-spacing: 0.16em; color: var(--h3-muted);
+.home-v3 .h3-panel-num {
+  align-self: center; max-width: 85%;
+  font-size: 0.8em; letter-spacing: 0.16em; color: var(--h3-muted);
 }
-.home-v3 .h3-arch h3 {
-  margin-top: 12px; font-size: clamp(19px, 1.9vw, 24px); font-weight: 600;
-  line-height: 1.2; letter-spacing: -0.02em; color: var(--h3-ink-deep);
+.home-v3 .h3-panel h3 {
+  align-self: center; max-width: 85%;
+  margin-top: 0.7em; text-align: center;
+  font-size: 1.55em; line-height: 1.16; font-weight: 600;
+  letter-spacing: -0.02em; color: var(--h3-ink-deep);
   text-wrap: balance;
 }
-.home-v3 .h3-arch-desc {
-  font-size: 15.5px; color: var(--h3-muted); line-height: 1.6;
+.home-v3 .h3-panel-desc {
+  margin-top: 1.15em; font-size: 1em; color: var(--h3-muted);
 }
-.home-v3 .h3-arch ul {
-  margin-top: 18px; list-style: none;
-  font-size: 14.5px; color: var(--h3-muted);
+.home-v3 .h3-panel ul {
+  margin-top: 1.15em; list-style: none;
+  font-size: 0.93em; color: var(--h3-muted);
 }
-.home-v3 .h3-arch li {
-  padding: 9px 0; border-top: 1px solid var(--h3-rule);
+.home-v3 .h3-panel li {
+  padding: 0.58em 0; border-top: 1px solid var(--h3-rule);
 }
-.home-v3 .h3-arch-cta { margin-top: 24px; }
-
-/* slim column bases at the bottom corners */
-.home-v3 .h3-arch-foot {
-  position: absolute; bottom: 0; width: 28px; height: 24px; overflow: visible;
-}
-.home-v3 .h3-arch-foot path {
-  fill: none; stroke: var(--h3-ink); stroke-width: 1; stroke-opacity: .4;
-  vector-effect: non-scaling-stroke;
-}
-.home-v3 .h3-arch-foot-l { left: -1px; }
-.home-v3 .h3-arch-foot-r { right: -1px; transform: scaleX(-1); }
+.home-v3 .h3-panel-cta { margin-top: 1.4em; }
+.home-v3 .h3-panel-cta .h3-textlink { font-size: 0.97em; }
 
 .home-v3 .h3-lintel {
   margin: 44px auto 0; max-width: 82ch;
@@ -546,8 +537,6 @@
    RESPONSIVE
    ============================================================ */
 @media (max-width: 1080px) {
-  .home-v3 .h3-arches { grid-template-columns: 1fr; gap: 40px; }
-  .home-v3 .h3-arch { max-width: 620px; margin: 0 auto; width: 100%; }
   .home-v3 .h3-case {
     grid-template-columns: 1fr;
     gap: 8px; padding: 22px 0;
@@ -608,8 +597,8 @@
 
   .home-v3 .h3-proof p { letter-spacing: 0.14em; font-size: 11px; line-height: 2; }
 
-  .home-v3 .h3-arch-body { padding: 6px 24px 48px; }
   .home-v3 .h3-lintel { letter-spacing: 0.1em; line-height: 2; }
+
 
   .home-v3 .h3-newsletter { top: 4%; }
   .home-v3 .h3-newsletter::before {
@@ -634,7 +623,33 @@
   .home-v3 .h3-shloka { padding: 22px 0 4px; }
 }
 
+/* Under 768px the arch opening is far too narrow for the body copy at
+   any readable size, so the illustration becomes a decorative header
+   band and the text sits below it on plain paper. The band is cropped
+   at 62% of the source, which keeps the whole cusped arch head and
+   breaks cleanly on the column capitals. */
+@media (max-width: 767.98px) {
+  .home-v3 .h3-panels { gap: 52px; }
+  .home-v3 .h3-panel {
+    max-width: none; aspect-ratio: auto; container-type: normal;
+  }
+  .home-v3 .h3-panel-frame {
+    position: relative; inset: auto;
+    aspect-ratio: 828 / 627;
+    background-image: url("/img/chhatri-band.webp");
+    background-size: 100% auto;
+    background-position: top center;
+  }
+  .home-v3 .h3-panel-inner {
+    position: static; inset: auto;
+    font-size: 15px; padding-top: 22px;
+  }
+  .home-v3 .h3-panel-num,
+  .home-v3 .h3-panel h3 { align-self: flex-start; max-width: none; text-align: left; }
+  .home-v3 .h3-panel h3 { font-size: 22px; margin-top: 10px; }
+  .home-v3 .h3-panel-cta .h3-textlink { font-size: 15px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .home-v3 * { transition: none !important; }
-  .home-v3 .h3-arch:hover { transform: none; }
 }
