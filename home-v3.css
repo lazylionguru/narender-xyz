@@ -120,6 +120,15 @@
 }
 .home-v3 .h3-textlink:hover { color: var(--h3-accent-ink); }
 
+.home-v3 .h3-inline-link {
+  color: var(--h3-ink); text-decoration: underline;
+  text-decoration-color: var(--h3-rule); text-underline-offset: 3px;
+}
+.home-v3 .h3-inline-link:hover {
+  color: var(--h3-accent-ink); text-decoration-color: currentColor;
+}
+.home-v3 .h3-inline-link span { font-size: 0.85em; opacity: .55; }
+
 /* ============================================================
    NAV
    Fixed, transparent while the hero is on screen, paper-backed
@@ -240,32 +249,18 @@
   color: var(--h3-muted); font-size: clamp(15px, 1.35vw, 18px);
   line-height: 1.62;
 }
+/* Button and secondary link ride one centred row, vertically centred on
+   each other so the link sits on the button label's optical centre. The
+   note is its own line, centred under the pair. */
 .home-v3 .h3-hero-ctas {
   margin-top: 30px;
-  display: flex; align-items: flex-start; justify-content: center;
-  gap: 10px 28px; flex-wrap: wrap;
+  display: flex; flex-direction: column; align-items: center;
 }
-.home-v3 .h3-cta-block { display: flex; flex-direction: column; align-items: center; }
+.home-v3 .h3-cta-row {
+  display: flex; align-items: center; justify-content: center; gap: 24px;
+}
 .home-v3 .h3-cta-note {
-  margin-top: 11px; font-size: 13px; color: var(--h3-muted);
-}
-.home-v3 .h3-cta-alt { margin-top: 15px; }
-
-/* ============================================================
-   PROOF STRIP
-   ============================================================ */
-.home-v3 .h3-proof {
-  border-top: 1px solid var(--h3-rule);
-  border-bottom: 1px solid var(--h3-rule);
-  margin-top: clamp(56px, 8vw, 96px);
-}
-.home-v3 .h3-proof p {
-  max-width: var(--h3-max); margin: 0 auto;
-  padding: 20px var(--h3-gut);
-  text-align: center;
-  font-size: 12px; font-weight: 500;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--h3-muted);
+  margin-top: 10px; font-size: 13px; color: var(--h3-muted);
 }
 
 /* ============================================================
@@ -283,22 +278,34 @@
 /* ============================================================
    SERVICES — illustrated chhatri panels
 
-   Geometry, measured off img/chhatri-frame.webp (1134x1387):
-     the arch opening is clear of linework from y 0.44 downward,
-     spanning x 0.297..0.707 at y 0.47 and widening to
-     x 0.245..0.759 by y 0.63, then narrowing to x 0.292..0.713
-     at y 0.95 where the plinths end.
-   The content box therefore sits at top 47%, inset 27% each side,
-   with the number and title capped to 85% of that box so they clear
-   the tighter part of the curve above.
+   Geometry, measured off img/chhatri-frame.webp (1134x1387) at
+   0.5% row resolution. The arch opening is clear of linework from
+   y 0.44 down, spanning x 0.290..0.714 at y 0.47-0.50, widening to
+   x 0.244..0.760 at y 0.60, and closing back to x 0.292..0.713 by
+   y 0.94. A uniform 29.5% inset therefore clears the linework
+   everywhere between y 0.47 and y 0.90, which is where the pinned
+   link bottoms out.
 
-   Type scales with the panel via container query units, so it steps
-   down long before anything can touch the linework.
+   Panels sit side by side from 1024px up. The grid breaks out to
+   1240px of content so each panel lands near 600px: inside the
+   1180px text column the panels would only reach 510px, where the
+   opening is too narrow for the body copy at a readable size.
+
+   Type is driven by container query units off the panel, not the
+   viewport, so it steps down as the column narrows.
    ============================================================ */
 .home-v3 .h3-panels {
   margin-top: 48px;
-  display: grid; gap: clamp(40px, 5vw, 64px);
+  width: min(1240px, calc(100vw - 2 * var(--h3-gut)));
+  margin-left: 50%; transform: translateX(-50%);
+  display: grid; grid-template-columns: 1fr;
+  gap: clamp(40px, 5vw, 56px);
   justify-items: center;
+}
+@media (min-width: 1200px) {
+  .home-v3 .h3-panels {
+    grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;
+  }
 }
 .home-v3 .h3-panel {
   position: relative;
@@ -316,34 +323,48 @@
 
 .home-v3 .h3-panel-inner {
   position: absolute;
-  top: 47%; left: 28.5%; right: 28.5%; bottom: 6%;
+  top: 47%; left: 29.5%; right: 29.5%; bottom: 11%;
   display: flex; flex-direction: column;
-  font-size: clamp(10.5px, 1.95cqw, 15px);
+  font-size: clamp(10.5px, 1.9cqw, 15px);
   line-height: 1.55;
 }
 .home-v3 .h3-panel-num {
-  align-self: center; max-width: 85%;
+  align-self: center; max-width: 96%;
   font-size: 0.8em; letter-spacing: 0.16em; color: var(--h3-muted);
 }
 .home-v3 .h3-panel h3 {
-  align-self: center; max-width: 85%;
-  margin-top: 0.7em; text-align: center;
-  font-size: 1.55em; line-height: 1.16; font-weight: 600;
+  align-self: center; max-width: 96%;
+  margin-top: 0.6em; text-align: center;
+  font-size: 1.5em; line-height: 1.16; font-weight: 600;
   letter-spacing: -0.02em; color: var(--h3-ink-deep);
   text-wrap: balance;
 }
 .home-v3 .h3-panel-desc {
-  margin-top: 1.15em; font-size: 1em; color: var(--h3-muted);
+  margin-top: 1.1em; font-size: 1em; color: var(--h3-muted);
 }
 .home-v3 .h3-panel ul {
-  margin-top: 1.15em; list-style: none;
+  margin-top: 1.1em; list-style: none;
   font-size: 0.93em; color: var(--h3-muted);
 }
 .home-v3 .h3-panel li {
-  padding: 0.58em 0; border-top: 1px solid var(--h3-rule);
+  padding: 0.55em 0; border-top: 1px solid var(--h3-rule);
 }
-.home-v3 .h3-panel-cta { margin-top: 1.4em; }
+/* Pinned to the foot of the content box in both panels, so the two
+   links land at exactly the same height and mirror each other. The
+   padding is the guaranteed minimum gap from the feature list. */
+.home-v3 .h3-panel-cta { margin-top: auto; padding-top: 1.3em; }
 .home-v3 .h3-panel-cta .h3-textlink { font-size: 0.97em; }
+
+/* Narrower columns: tighten leading and list padding so the copy
+   keeps clear of the arch. */
+@container (max-width: 700px) {
+  .home-v3 .h3-panel-inner { line-height: 1.45; }
+  .home-v3 .h3-panel li { padding: 0.4em 0; }
+  .home-v3 .h3-panel h3 { margin-top: 0.5em; }
+  .home-v3 .h3-panel-desc { margin-top: 0.9em; }
+  .home-v3 .h3-panel ul { margin-top: 0.9em; }
+  .home-v3 .h3-panel-cta { padding-top: 1em; }
+}
 
 .home-v3 .h3-lintel {
   margin: 44px auto 0; max-width: 82ch;
@@ -488,7 +509,7 @@
 
 .home-v3 .h3-footer-body {
   max-width: var(--h3-max); margin: 0 auto;
-  padding: 44px var(--h3-gut) 26px;
+  padding: 44px var(--h3-gut) 44px;
 }
 .home-v3 .h3-footer-grid {
   display: grid;
@@ -519,7 +540,8 @@
 .home-v3 .h3-social a:hover { border-color: var(--h3-ink); color: var(--h3-accent-ink); }
 .home-v3 .h3-social svg { width: 17px; height: 17px; fill: currentColor; display: block; }
 
-.home-v3 .h3-shloka { text-align: center; padding: 26px 0 4px; }
+/* Sits inside the left brand block, left aligned. */
+.home-v3 .h3-shloka { margin-top: 20px; }
 .home-v3 .h3-shloka p:first-child {
   font-family: var(--h3-font-dev); font-weight: 400;
   font-size: 14px; line-height: 1.9; color: var(--h3-ink);
@@ -590,10 +612,10 @@
   }
   .home-v3 .h3-h1 { margin-top: 18px; }
   .home-v3 .h3-hero-sub { margin-top: 18px; }
-  .home-v3 .h3-hero-ctas { margin-top: 26px; flex-direction: column; align-items: stretch; gap: 18px; }
-  .home-v3 .h3-cta-block { align-items: stretch; }
-  .home-v3 .h3-hero-ctas .h3-btn { width: 100%; }
-  .home-v3 .h3-cta-alt { margin-top: 0; align-self: center; }
+  .home-v3 .h3-hero-ctas { margin-top: 26px; align-self: stretch; }
+  .home-v3 .h3-cta-row { flex-direction: column; align-items: stretch; gap: 16px; width: 100%; }
+  .home-v3 .h3-cta-row .h3-btn { width: 100%; }
+  .home-v3 .h3-cta-row .h3-textlink { align-self: center; }
 
   .home-v3 .h3-proof p { letter-spacing: 0.14em; font-size: 11px; line-height: 2; }
 
@@ -619,8 +641,8 @@
   .home-v3 .h3-footer-scene { aspect-ratio: 828 / 1273; }
   .home-v3 .h3-footer-trim { aspect-ratio: 828 / 198; }
   .home-v3 .h3-footer-grid { grid-template-columns: 1fr 1fr; gap: 30px 24px; }
-  .home-v3 .h3-footer-body { padding-top: 36px; }
-  .home-v3 .h3-shloka { padding: 22px 0 4px; }
+  .home-v3 .h3-footer-body { padding-top: 36px; padding-bottom: 36px; }
+  .home-v3 .h3-shloka { margin-top: 16px; }
 }
 
 /* Under 768px the arch opening is far too narrow for the body copy at
@@ -642,8 +664,10 @@
   }
   .home-v3 .h3-panel-inner {
     position: static; inset: auto;
-    font-size: 15px; padding-top: 22px;
+    font-size: 15px; line-height: 1.55; padding-top: 22px;
   }
+  .home-v3 .h3-panel li { padding: 0.55em 0; }
+  .home-v3 .h3-panel-cta { margin-top: 0; padding-top: 1.3em; }
   .home-v3 .h3-panel-num,
   .home-v3 .h3-panel h3 { align-self: flex-start; max-width: none; text-align: left; }
   .home-v3 .h3-panel h3 { font-size: 22px; margin-top: 10px; }

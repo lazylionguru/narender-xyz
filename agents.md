@@ -58,11 +58,10 @@ The homepage at https://narender.xyz/ is laid out in this order:
 
 1. Navigation: Services, Results, Writing, Coaching, and a "Book a free call" CTA
 2. Hero: availability status, the tagline "I build things. I rank them.", and the primary booking CTA (30 minutes, includes a full site audit)
-3. Proof strip: Kymo, RemoteStack, manali.today, Velar, Panther Academy
-4. Services: the two offers above, presented as two jharokha arch panels
-5. Results: case rows for Kymo, RemoteStack, manali.today, Velar, and Panther Academy, followed by a condensed experience timeline
-6. FAQ: GEO-focused questions, marked up as FAQPage structured data
-7. Footer: the Building at 2,050m newsletter signup, navigation, social links, and a Sanskrit shloka
+3. Services: the two offers above, presented as two illustrated chhatri arch panels
+4. Results: case rows for Kymo, RemoteStack, manali.today, Velar, and Panther Academy, followed by a condensed experience timeline
+5. FAQ: GEO-focused questions, marked up as FAQPage structured data
+6. Footer: the Building at 2,050m newsletter signup, navigation, social links, and a Sanskrit shloka
 
 The page carries JSON-LD for Person (with the products he owns), ProfessionalService with an offer catalogue and the free consultation offer, and FAQPage.
 

@@ -33,7 +33,7 @@ Book the free consultation call and audit: https://cal.com/narender/intro
 
 ## Homepage structure
 
-https://narender.xyz/ runs in this order: navigation, hero, proof strip (Kymo, RemoteStack, manali.today, Velar, Panther Academy), the two services as jharokha arch panels, results with case rows and a condensed experience timeline, a GEO-focused FAQ, and a footer carrying the newsletter signup. The page publishes JSON-LD for Person (including the products he owns), ProfessionalService with an offer catalogue and the free consultation offer, and FAQPage.
+https://narender.xyz/ runs in this order: navigation, hero, the two services as illustrated chhatri arch panels, results (case rows for Kymo, RemoteStack, manali.today, Velar and Panther Academy plus a condensed experience timeline), a GEO-focused FAQ, and a footer carrying the newsletter signup. The page publishes JSON-LD for Person (including the products he owns), ProfessionalService with an offer catalogue and the free consultation offer, and FAQPage.
 
 ## Proven results
 
