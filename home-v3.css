@@ -279,26 +279,32 @@
    SERVICES
 
    Desktop uses one twin-arch pavilion, img/services-pavilion.webp
-   (1536x1024, 3:2). Openings measured off the pixels at 24px row
-   steps: the left opening runs x 0.224..0.376 at y 0.45, opens to
-   x 0.129..0.489 by y 0.63, and holds to x 0.148..0.470 at y 0.92
-   where the plinths start. The right opening mirrors it about the
-   shared centre pillar at x 0.50.
+   (1536x1024, 3:2). Openings measured off the pixels at 0.5% row
+   steps: between y 0.52 and 0.925 the left opening is clear from
+   x 0.1478 to 0.4616 and the right from x 0.5365 to 0.8516, either
+   side of the shared centre pillar at x 0.50.
 
-   The content grid is inset to x 0.155..0.845 with a 0.09 column
-   gap, so each block occupies x 0.155..0.455 and x 0.545..0.845.
-   That clears the narrowest point of each opening by about 10px at
-   a 1240px container, and the gap straddles the centre pillar so
-   neither block ever crosses it.
+   The wrapper is sized to the rendered image exactly, so every
+   overlay percentage is a percentage of the illustration itself:
+     width  = min(100%, 132vh)   132vh = 1.5 x 88vh
+     height = width / 1.5        so height never exceeds 88vh
+   The pavilion therefore reaches the full viewport width whenever
+   the viewport is 1.32:1 or taller, and is height-capped and
+   centred on wider ones. Nothing is ever cropped, which keeps both
+   openings whole. A 1188px floor stops the height cap from shrinking
+   the openings below the size the copy needs on short laptops. Type is sized in container query units off that
+   same wrapper, so the copy scales with the openings.
 
-   Below 1280px the pavilion is dropped for the existing stacked
+   Below 1280px the pavilion is dropped for the stacked
    single-chhatri layout. The image swap lives in media queries, so
    only the matching background is ever fetched.
    ============================================================ */
+.home-v3 .h3-section-bleed { padding-left: 0; padding-right: 0; }
+
 .home-v3 .h3-panels {
   margin-top: 48px;
   width: min(1240px, calc(100vw - 2 * var(--h3-gut)));
-  margin-left: 50%; transform: translateX(-50%);
+  margin-left: auto; margin-right: auto;
 }
 .home-v3 .h3-panels-grid {
   display: grid; grid-template-columns: 1fr;
@@ -326,17 +332,16 @@
 .home-v3 .h3-panel-inner {
   position: absolute;
   top: 47%; left: 29.5%; right: 29.5%; bottom: 11%;
-  display: flex; flex-direction: column;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
   font-size: clamp(10.5px, 1.9cqw, 15px);
   line-height: 1.55;
 }
 .home-v3 .h3-panel-num {
-  align-self: center; max-width: 96%;
   font-size: 0.8em; letter-spacing: 0.16em; color: var(--h3-muted);
 }
 .home-v3 .h3-panel h3 {
-  align-self: center; max-width: 96%;
-  margin-top: 0.6em; text-align: center;
+  margin-top: 0.6em;
   font-size: 1.5em; line-height: 1.16; font-weight: 600;
   letter-spacing: -0.02em; color: var(--h3-ink-deep);
   text-wrap: balance;
@@ -344,18 +349,27 @@
 .home-v3 .h3-panel-desc {
   margin-top: 1.1em; font-size: 1em; color: var(--h3-muted);
 }
+/* Divider rows run the full width of the opening; the labels sit
+   centred on them. */
 .home-v3 .h3-panel ul {
-  margin-top: 1.1em; list-style: none;
+  margin-top: 1.1em; list-style: none; align-self: stretch;
   font-size: 0.93em; color: var(--h3-muted);
 }
 .home-v3 .h3-panel li {
   padding: 0.55em 0; border-top: 1px solid var(--h3-rule);
 }
-/* Pinned to the foot of the content box in both blocks, so the two
-   links land at exactly the same height and mirror each other. The
-   padding is the guaranteed minimum gap from the feature list. */
 .home-v3 .h3-panel-cta { margin-top: auto; padding-top: 1.3em; }
-.home-v3 .h3-panel-cta .h3-textlink { font-size: 0.97em; }
+
+/* Ink button, never terracotta: the accent stays with the nav and
+   hero primary. Padding tracks the hero button's 13/22 at 15px. */
+.home-v3 .h3-btn-arch {
+  background: var(--h3-ink-deep); color: var(--h3-paper);
+  border-color: var(--h3-ink-deep);
+  border-radius: 2px;
+  font-size: 0.97em; font-weight: 500;
+  padding: 0.87em 1.47em;
+}
+.home-v3 .h3-btn-arch:hover { background: var(--h3-ink); border-color: var(--h3-ink); }
 
 @container (max-width: 700px) {
   .home-v3 .h3-panel-inner { line-height: 1.45; }
@@ -370,18 +384,21 @@
 @media (min-width: 1280px) {
   .home-v3 .h3-panels {
     position: relative;
-    /* A narrower rail than the page gutter, so a 1280px viewport still
-       gets the full 1240px container the openings need. */
-    width: min(1240px, calc(100vw - 40px));
+    /* 132vh = 1.5 x 88vh, so the height cap is honoured wherever it
+       leaves the openings big enough. 1188px is the smallest render
+       whose openings still hold 15px copy plus a button; below a
+       900px-tall viewport that floor wins and the section runs a
+       little past 88vh rather than pushing text onto the linework. */
+    width: min(100%, max(1188px, 132vh));
     aspect-ratio: 1536 / 1024;
     background: url("/img/services-pavilion.webp") center / contain no-repeat;
+    container-type: inline-size;
   }
   .home-v3 .h3-panels-grid {
     position: absolute;
-    top: 52%; left: 15.5%; right: 15.5%; bottom: 9%;
+    top: 52%; left: 15.5%; right: 15.5%; bottom: 8%;
     grid-template-columns: 1fr 1fr;
-    column-gap: 13.04%;   /* 0.09 of the container, straddling the pillar */
-    gap: 0 13.04%;
+    gap: 0 13.04%;   /* 0.09 of the wrapper, straddling the pillar */
     justify-items: stretch;
   }
   .home-v3 .h3-panel {
@@ -394,16 +411,16 @@
   .home-v3 .h3-panel-inner {
     position: static; inset: auto;
     width: 100%;
-    font-size: 16px; line-height: 1.5;
+    /* 1.29cqw of the pavilion width is 16px at a 1240px render */
+    font-size: clamp(15px, 1.29cqw, 18px);
+    line-height: 1.5;
   }
-  .home-v3 .h3-panel-num,
-  .home-v3 .h3-panel h3 { align-self: flex-start; max-width: none; text-align: left; }
-  .home-v3 .h3-panel h3 { font-size: 1.45em; margin-top: 0.45em; }
-  .home-v3 .h3-panel-desc { margin-top: 0.75em; }
-  .home-v3 .h3-panel ul { margin-top: 0.75em; font-size: 0.9em; }
-  .home-v3 .h3-panel li { padding: 0.3em 0; }
-  .home-v3 .h3-panel-cta { padding-top: 0.8em; }
-  .home-v3 .h3-panel-cta .h3-textlink { font-size: 0.95em; }
+  .home-v3 .h3-panel h3 { font-size: 1.45em; margin-top: 0.35em; }
+  .home-v3 .h3-panel-desc { margin-top: 0.62em; }
+  .home-v3 .h3-panel ul { margin-top: 0.62em; font-size: 0.9em; }
+  .home-v3 .h3-panel li { padding: 0.2em 0; }
+  .home-v3 .h3-panel-cta { padding-top: 0.6em; }
+  .home-v3 .h3-btn-arch { font-size: 0.9em; padding: 0.68em 1.35em; }
 }
 
 .home-v3 .h3-lintel {
@@ -708,10 +725,8 @@
   }
   .home-v3 .h3-panel li { padding: 0.55em 0; }
   .home-v3 .h3-panel-cta { margin-top: 0; padding-top: 1.3em; }
-  .home-v3 .h3-panel-num,
-  .home-v3 .h3-panel h3 { align-self: flex-start; max-width: none; text-align: left; }
   .home-v3 .h3-panel h3 { font-size: 22px; margin-top: 10px; }
-  .home-v3 .h3-panel-cta .h3-textlink { font-size: 15px; }
+  .home-v3 .h3-panel-cta { padding-top: 1.3em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
