@@ -276,36 +276,34 @@
 .home-v3 .h3-section-head .h3-h2 { margin-top: 12px; }
 
 /* ============================================================
-   SERVICES — illustrated chhatri panels
+   SERVICES
 
-   Geometry, measured off img/chhatri-frame.webp (1134x1387) at
-   0.5% row resolution. The arch opening is clear of linework from
-   y 0.44 down, spanning x 0.290..0.714 at y 0.47-0.50, widening to
-   x 0.244..0.760 at y 0.60, and closing back to x 0.292..0.713 by
-   y 0.94. A uniform 29.5% inset therefore clears the linework
-   everywhere between y 0.47 and y 0.90, which is where the pinned
-   link bottoms out.
+   Desktop uses one twin-arch pavilion, img/services-pavilion.webp
+   (1536x1024, 3:2). Openings measured off the pixels at 24px row
+   steps: the left opening runs x 0.224..0.376 at y 0.45, opens to
+   x 0.129..0.489 by y 0.63, and holds to x 0.148..0.470 at y 0.92
+   where the plinths start. The right opening mirrors it about the
+   shared centre pillar at x 0.50.
 
-   Panels sit side by side from 1024px up. The grid breaks out to
-   1240px of content so each panel lands near 600px: inside the
-   1180px text column the panels would only reach 510px, where the
-   opening is too narrow for the body copy at a readable size.
+   The content grid is inset to x 0.155..0.845 with a 0.09 column
+   gap, so each block occupies x 0.155..0.455 and x 0.545..0.845.
+   That clears the narrowest point of each opening by about 10px at
+   a 1240px container, and the gap straddles the centre pillar so
+   neither block ever crosses it.
 
-   Type is driven by container query units off the panel, not the
-   viewport, so it steps down as the column narrows.
+   Below 1280px the pavilion is dropped for the existing stacked
+   single-chhatri layout. The image swap lives in media queries, so
+   only the matching background is ever fetched.
    ============================================================ */
 .home-v3 .h3-panels {
   margin-top: 48px;
   width: min(1240px, calc(100vw - 2 * var(--h3-gut)));
   margin-left: 50%; transform: translateX(-50%);
+}
+.home-v3 .h3-panels-grid {
   display: grid; grid-template-columns: 1fr;
   gap: clamp(40px, 5vw, 56px);
   justify-items: center;
-}
-@media (min-width: 1200px) {
-  .home-v3 .h3-panels {
-    grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;
-  }
 }
 .home-v3 .h3-panel {
   position: relative;
@@ -313,13 +311,17 @@
   aspect-ratio: 1134 / 1387;
   container-type: inline-size;
 }
-.home-v3 .h3-panel-frame {
-  position: absolute; inset: 0;
-  background: url("/img/chhatri-frame.webp") center / contain no-repeat;
+.home-v3 .h3-panel-frame { position: absolute; inset: 0; }
+/* Declared only below the pavilion breakpoint, so a desktop never
+   requests the single-chhatri file at all. */
+@media (max-width: 1279.98px) {
+  .home-v3 .h3-panel-frame {
+    background: url("/img/chhatri-frame.webp") center / contain no-repeat;
+  }
+  /* The single chhatri is near symmetric, so this reads as a subtle
+     variation rather than an obvious flip. Background layer only. */
+  .home-v3 .h3-panel:nth-of-type(2) .h3-panel-frame { transform: scaleX(-1); }
 }
-/* The illustration is near symmetric, so this reads as a subtle
-   variation rather than an obvious flip. Background layer only. */
-.home-v3 .h3-panel:nth-of-type(2) .h3-panel-frame { transform: scaleX(-1); }
 
 .home-v3 .h3-panel-inner {
   position: absolute;
@@ -349,14 +351,12 @@
 .home-v3 .h3-panel li {
   padding: 0.55em 0; border-top: 1px solid var(--h3-rule);
 }
-/* Pinned to the foot of the content box in both panels, so the two
+/* Pinned to the foot of the content box in both blocks, so the two
    links land at exactly the same height and mirror each other. The
    padding is the guaranteed minimum gap from the feature list. */
 .home-v3 .h3-panel-cta { margin-top: auto; padding-top: 1.3em; }
 .home-v3 .h3-panel-cta .h3-textlink { font-size: 0.97em; }
 
-/* Narrower columns: tighten leading and list padding so the copy
-   keeps clear of the arch. */
 @container (max-width: 700px) {
   .home-v3 .h3-panel-inner { line-height: 1.45; }
   .home-v3 .h3-panel li { padding: 0.4em 0; }
@@ -364,6 +364,46 @@
   .home-v3 .h3-panel-desc { margin-top: 0.9em; }
   .home-v3 .h3-panel ul { margin-top: 0.9em; }
   .home-v3 .h3-panel-cta { padding-top: 1em; }
+}
+
+/* ---------- twin-arch pavilion, 1280px and up ---------- */
+@media (min-width: 1280px) {
+  .home-v3 .h3-panels {
+    position: relative;
+    /* A narrower rail than the page gutter, so a 1280px viewport still
+       gets the full 1240px container the openings need. */
+    width: min(1240px, calc(100vw - 40px));
+    aspect-ratio: 1536 / 1024;
+    background: url("/img/services-pavilion.webp") center / contain no-repeat;
+  }
+  .home-v3 .h3-panels-grid {
+    position: absolute;
+    top: 52%; left: 15.5%; right: 15.5%; bottom: 9%;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 13.04%;   /* 0.09 of the container, straddling the pillar */
+    gap: 0 13.04%;
+    justify-items: stretch;
+  }
+  .home-v3 .h3-panel {
+    position: static;
+    width: auto; max-width: none; aspect-ratio: auto;
+    container-type: normal;
+    display: flex;
+  }
+  .home-v3 .h3-panel-frame { display: none; }
+  .home-v3 .h3-panel-inner {
+    position: static; inset: auto;
+    width: 100%;
+    font-size: 16px; line-height: 1.5;
+  }
+  .home-v3 .h3-panel-num,
+  .home-v3 .h3-panel h3 { align-self: flex-start; max-width: none; text-align: left; }
+  .home-v3 .h3-panel h3 { font-size: 1.45em; margin-top: 0.45em; }
+  .home-v3 .h3-panel-desc { margin-top: 0.75em; }
+  .home-v3 .h3-panel ul { margin-top: 0.75em; font-size: 0.9em; }
+  .home-v3 .h3-panel li { padding: 0.3em 0; }
+  .home-v3 .h3-panel-cta { padding-top: 0.8em; }
+  .home-v3 .h3-panel-cta .h3-textlink { font-size: 0.95em; }
 }
 
 .home-v3 .h3-lintel {

@@ -112,46 +112,48 @@
       <p class="h3-lede">Every engagement starts the same way: a free consultation call with a full audit of your site, so we both know what we are dealing with before anyone commits.</p>
     </div>
 
+    <!-- One markup tree, two presentations. At 1280px and up the wrapper
+         carries the twin-arch pavilion and the two blocks are positioned
+         inside its arch openings. Below that the wrapper is a plain stack
+         and each block carries its own single chhatri band. The images are
+         swapped in CSS media queries, so a phone never fetches the pavilion
+         and a desktop never fetches the singles. -->
     <div class="h3-panels">
+      <div class="h3-panels-grid">
 
-      <article class="h3-panel">
-        <!-- Illustrated chhatri frame. Panel 02 mirrors the same file on this
-             background layer only, so no text is ever flipped. -->
-        <div class="h3-panel-frame" aria-hidden="true"></div>
+        <article class="h3-panel">
+          <div class="h3-panel-frame" aria-hidden="true"></div>
+          <div class="h3-panel-inner">
+            <p class="h3-panel-num">01</p>
+            <h3>Done-for-you SEO + GEO</h3>
+            <p class="h3-panel-desc">I run the whole search function. Keyword and entity research, content architecture, and the structure that gets you retrieved and cited inside ChatGPT, Perplexity, and Gemini.</p>
+            <ul>
+              <li>Topical authority and content clusters</li>
+              <li>Technical SEO and schema</li>
+              <li>GEO structuring for AI citation</li>
+              <li>Monthly reporting against real queries</li>
+            </ul>
+            <p class="h3-panel-cta"><a class="h3-textlink" data-cal href="https://cal.com/narender/intro">Book a free call</a></p>
+          </div>
+        </article>
 
-        <div class="h3-panel-inner">
-          <p class="h3-panel-num">01</p>
-          <h3>Done-for-you SEO + GEO</h3>
-          <p class="h3-panel-desc">I run the whole search function. Keyword and entity research, content architecture, technical fixes, and the structure that gets you retrieved and cited inside ChatGPT, Perplexity, Gemini, and AI Overviews.</p>
-          <ul>
-            <li>Topical authority and content clusters</li>
-            <li>Technical SEO and schema</li>
-            <li>GEO structuring for AI citation</li>
-            <li>Monthly reporting against real queries</li>
-          </ul>
-          <p class="h3-panel-cta"><a class="h3-textlink" data-cal href="https://cal.com/narender/intro">Book a free call</a></p>
-        </div>
-      </article>
+        <article class="h3-panel" id="coaching">
+          <div class="h3-panel-frame" aria-hidden="true"></div>
+          <div class="h3-panel-inner">
+            <p class="h3-panel-num">02</p>
+            <h3>Coaching</h3>
+            <p class="h3-panel-desc">For teams that want to own this in house. I teach SEO and AEO fundamentals, set up your blog pipeline end to end, and get your people fluent in the tooling.</p>
+            <ul>
+              <li>SEO and AEO fundamentals, taught properly</li>
+              <li>Blog pipelines from brief to publish</li>
+              <li>Tooling setup and workflows</li>
+              <li>Live reviews of your team's output</li>
+            </ul>
+            <p class="h3-panel-cta"><a class="h3-textlink" data-cal href="https://cal.com/narender/intro">Book a free call</a></p>
+          </div>
+        </article>
 
-      <article class="h3-panel" id="coaching">
-        <!-- Illustrated chhatri frame. Panel 02 mirrors the same file on this
-             background layer only, so no text is ever flipped. -->
-        <div class="h3-panel-frame" aria-hidden="true"></div>
-
-        <div class="h3-panel-inner">
-          <p class="h3-panel-num">02</p>
-          <h3>Coaching</h3>
-          <p class="h3-panel-desc">For teams that want to own this in house. I teach SEO and AEO fundamentals, set up your blog pipeline end to end, and get your people fluent in the tooling so the work continues after I leave.</p>
-          <ul>
-            <li>SEO and AEO fundamentals, taught properly</li>
-            <li>Blog pipelines from brief to publish</li>
-            <li>Tooling setup and workflows</li>
-            <li>Live reviews of your team's output</li>
-          </ul>
-          <p class="h3-panel-cta"><a class="h3-textlink" data-cal href="https://cal.com/narender/intro">Book a free call</a></p>
-        </div>
-      </article>
-
+      </div>
     </div>
 
     <p class="h3-lintel">The audit is yours to keep either way, including a report of which AI crawlers already read your site, measured with Kymo, the analytics tool I built.</p>
@@ -192,12 +194,14 @@
 
       <li class="h3-case">
         <div class="h3-case-name">Velar</div>
-        <p class="h3-case-desc">Built the content and marketing function from scratch for Bitcoin DeFi on Stacks. I wrote the tagline <a class="h3-inline-link" href="https://www.google.com/search?q=%22world%27s+first+Bitcoin+Perpdex%22" target="_blank" rel="noopener">"world's first Bitcoin Perpdex" <span aria-hidden="true">&#8599;</span></a> and treated it as a keyword, then led the ICO campaign end to end.</p>
+        <p class="h3-case-desc">Built the content and marketing function from scratch for Bitcoin DeFi on Stacks. I wrote the tagline <a class="h3-inline-link" href="https://www.google.com/search?q=world%27s+first+Bitcoin+Perpdex" target="_blank" rel="noopener">"world's first Bitcoin Perpdex" <span aria-hidden="true">&#8599;</span></a> and treated it as a keyword, then led the ICO campaign end to end.</p>
         <p class="h3-case-stat">Zero to 100k followers on X.</p>
       </li>
 
       <li class="h3-case">
-        <div class="h3-case-name">Panther Academy</div>
+        <div class="h3-case-name">
+          <a href="https://blog.pantherprotocol.io/tag/academy/" target="_blank" rel="noopener">Panther Academy <span aria-hidden="true">&#8599;</span></a>
+        </div>
         <p class="h3-case-desc">A technical education hub for Panther Protocol covering ZK-proofs, MEV, zkEVMs, and DeFi infrastructure. Keyword research, architecture, and the writing itself.</p>
         <p class="h3-case-stat">100% of published posts ranked page one.</p>
       </li>
