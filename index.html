@@ -49,7 +49,7 @@
   const SUBSTACK_URL = "https://narendercharan.substack.com";
   document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll("a[data-cal]").forEach(function (a) { a.href = CAL_URL; });
-    document.querySelectorAll("iframe[data-substack-embed]").forEach(function (f) { f.src = SUBSTACK_URL + "/embed"; });
+    document.querySelectorAll("form[data-substack]").forEach(function (f) { f.action = SUBSTACK_URL + "/subscribe"; });
   });
 </script>
 
@@ -255,19 +255,20 @@
     <div class="h3-newsletter" id="writing">
       <p class="h3-eyebrow h3-newsletter-kicker">Building at 2,050m</p>
       <h2 class="h3-newsletter-h">The unfiltered build log.</h2>
-      <!-- The publication blurb that used to sit here is printed inside
-           the embed verbatim, so it is not repeated above it. -->
+      <p class="h3-newsletter-p">I build tiny internet businesses from a Himalayan town and write down everything: ideas, launches, failures, and the hunt for the first paid customer.</p>
 
-      <!-- Substack's own embed. Subscribing happens inside the iframe, on
-           Substack, so the reader never leaves the page and never hits a
-           second signup screen. Cross-origin, so nothing inside it can be
-           restyled; the wrapper below only sizes and frames it. -->
-      <div class="h3-embed">
-        <iframe class="h3-embed-frame" data-substack-embed
-                src="https://narendercharan.substack.com/embed"
-                title="Subscribe to Building at 2,050m"
-                width="480" height="320" scrolling="no" loading="lazy"></iframe>
-      </div>
+      <!-- A GET to Substack's own subscribe page, so the email typed here
+           arrives as ?email=... and lands prefilled in their form: one
+           click to finish. Their /api/v1/free endpoint 403s on any
+           cross-origin post, so a static page cannot complete the
+           signup itself. -->
+      <form class="h3-form" data-substack method="get" target="_blank"
+            action="https://narendercharan.substack.com/subscribe">
+        <label class="h3-vh" for="h3-email">Email address</label>
+        <input id="h3-email" type="email" name="email" required
+               placeholder="you@company.com" autocomplete="email">
+        <button class="h3-btn h3-btn-ink" type="submit">Subscribe</button>
+      </form>
       <p class="h3-form-note">Free. One email whenever there's something worth saying.</p>
     </div>
   </div>
