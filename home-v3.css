@@ -208,8 +208,10 @@
   left: 50%; top: clamp(60px, 12vh, 140px);
   width: min(1180px, 150vw); height: min(760px, 88vh);
   transform: translateX(-50%);
+  /* Explicit radii, so the gradient reaches 0 inside the box. Sized to the
+     corners it is still ~40% opaque at the box edge, which shows as a seam. */
   background: radial-gradient(
-    ellipse at 50% 42%,
+    ellipse 50% 58% at 50% 42%,
     rgba(250, 239, 219, 0.70) 0%,
     rgba(250, 239, 219, 0.66) 38%,
     rgba(250, 239, 219, 0.40) 62%,
@@ -573,7 +575,7 @@
   .home-v3 .h3-hero::before {
     top: 30px; width: 170vw; height: min(660px, 72vh);
     background: radial-gradient(
-      ellipse at 50% 38%,
+      ellipse 50% 62% at 50% 38%,
       rgba(250, 239, 219, 0.90) 0%,
       rgba(250, 239, 219, 0.86) 48%,
       rgba(250, 239, 219, 0.46) 70%,
