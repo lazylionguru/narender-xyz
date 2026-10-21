@@ -11,6 +11,12 @@
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "none"
   },
+  // Both are Worker Custom Domains. A Redirect Rule in the dashboard sends
+  // www to the apex with a 301, keeping the path and query.
+  "routes": [
+    { "pattern": "narender.xyz", "custom_domain": true },
+    { "pattern": "www.narender.xyz", "custom_domain": true }
+  ],
   "workers_dev": true,
   "observability": { "enabled": true }
 }
