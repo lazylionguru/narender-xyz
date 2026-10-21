@@ -1,5 +1,14 @@
 {
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy && npm run smoke",
+    "smoke": "node scripts/smoke.mjs"
+  },
   "dependencies": {
     "puppeteer": "^25.0.4"
+  },
+  "devDependencies": {
+    "wrangler": "^4.151.3"
   }
 }

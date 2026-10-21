@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  // A static site: an assets-only Worker, no script. Cloudflare's asset
+  // handler serves /blog/ from blog/index.html and redirects /blog to /blog/.
+  "name": "narender-xyz",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    // Built by scripts/build.mjs from an allowlist, so .env, node_modules
+    // and the Python scripts can never be published.
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  },
+  "workers_dev": true,
+  "observability": { "enabled": true }
+}

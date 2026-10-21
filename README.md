@@ -24,61 +24,35 @@ narender-xyz/
 
 ## Deploy
 
-Push to main branch. Vercel auto-deploys.
+Hosted on Cloudflare Workers as an assets-only Worker (`wrangler.jsonc`).
+Pushing to GitHub does NOT deploy. Deploy from this machine:
+
+```bash
+npm run deploy
+```
+
+That runs three steps in order:
+
+1. `npm run build` copies the public files into `dist/` (`scripts/build.mjs`).
+   It uses an allowlist, so `.env`, `node_modules` and the Python scripts
+   never ship. **A new top-level public file must be added to the list in
+   `scripts/build.mjs`**, or it will not be served. Anything under `blog/` or
+   `img/` is picked up automatically.
+2. `wrangler deploy` uploads `dist/`.
+3. `npm run smoke` checks page content on https://narender.xyz, and checks
+   that `.env` and the source files return 404.
+
+`npm run smoke -- https://narender-xyz.nscharan007.workers.dev` checks the
+workers.dev copy. Cache headers live in `_headers`.
+
+Cloudflare serves `/blog/` from `blog/index.html` and redirects `/blog` to
+`/blog/` itself (`html_handling: auto-trailing-slash`). No rewrites needed.
 
 ---
-
-## Setup commands (run these once)
-
-```bash
-# 1. Go into the project folder
-cd ~/Desktop/narender-xyz    # or wherever you saved it
-
-# 2. Initialise git
-git init
-git add .
-git commit -m "Initial commit — narender.xyz"
-
-# 3. Create repo on GitHub (do this in browser: github.com/new)
-#    Name it: narender-xyz
-#    Keep it private if you want
-#    Do NOT initialise with README
-
-# 4. Connect and push
-git remote add origin https://github.com/YOUR-GITHUB-USERNAME/narender-xyz.git
-git branch -M main
-git push -u origin main
-
-# 5. Go to vercel.com
-#    Sign in with GitHub
-#    Click "Add New Project"
-#    Import narender-xyz repo
-#    Framework preset: Other (it's plain HTML)
-#    Click Deploy
-
-# 6. In Vercel dashboard: Settings > Domains > Add narender.xyz
-#    Vercel gives you nameservers like:
-#      ns1.vercel-dns.com
-#      ns2.vercel-dns.com
-#    Go to your domain registrar and replace existing nameservers with these
-
-# DNS propagates in 10 to 30 minutes. HTTPS is automatic.
-```
-
-## After setup — every future update
-
-```bash
-# Make your changes to any file, then:
-git add .
-git commit -m "describe what you changed"
-git push
-
-# Vercel detects the push and deploys in ~30 seconds
-```
 
 ## Before going live — remember to
 
 - [ ] Replace YOUR-HANDLE in footer links with your real LinkedIn and X URLs
 - [ ] Submit narender.xyz to Google Search Console
 - [ ] Add narender.xyz to Bing Webmaster Tools
-- [ ] Verify ownership in Google Search Console (Vercel makes this easy via DNS)
+- [ ] Verify ownership in Google Search Console (TXT record already on the Cloudflare zone)

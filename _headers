@@ -1,0 +1,12 @@
+/*
+  Strict-Transport-Security: max-age=63072000
+  X-Content-Type-Options: nosniff
+
+/img/*
+  Cache-Control: public, max-age=2592000
+
+/blog/*.jpg
+  Cache-Control: public, max-age=2592000
+
+/og-home.jpg
+  Cache-Control: public, max-age=2592000

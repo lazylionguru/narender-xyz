@@ -905,7 +905,7 @@ Next steps:
   git add .
   git commit -m "blog: add {generated} new post(s)"
   git push
-  Live on Vercel in ~30 seconds.
+  npm run deploy
 """)
 
 
